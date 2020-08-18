@@ -1,3 +1,104 @@
 h1, p {
   font-family: Lato;
 }
+h1 {
+    font-family: 'Roboto Black', sans-serif;
+    font-weight: 900;
+    font-size: 36px;
+    color: black;
+}
+
+h2 {
+    font-family: "Roboto Black", sans-serif;
+    font-weight: 900;
+    font-size: 24px;
+}
+
+h3 {
+    font-family: "Roboto Regular", sans-serif;
+    font-size: 24px;
+}
+
+h4 {
+    font-family: "Roboto Medium", sans-serif;
+    font-size: 20px;
+}
+
+h5 {
+    font-family: "Roboto Regular", sans-serif;
+    font-size: 12px;
+}
+
+p {
+    font-family: "Roboto Regular", sans-serif;
+    font-size: 16px;
+}
+
+b {
+    font-family: "Roboto Black", sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
+a {
+    font-family: "Roboto Black", sans-serif;
+    font-size: 16px;
+}
+
+
+h1.span {
+    font-family: "Roboto Thin", sans-serif;
+    font-weight: 100;
+
+
+}
+
+
+body {
+    background-color: #F0F0F0;
+}
+
+b {
+    color: #3C64B1;
+}
+
+p {
+    color: #606060;
+}
+
+.btn {
+    border-radius: 0 !important;
+
+}
+
+.btn-primary {
+    background-color: #3C64B1 !important;
+}
+.btn-link{
+    color: #3C64B1;
+}
+
+.lotties {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+.click-circle {
+    fill: skyblue;
+}
+
+.plot {
+    
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 800px;
+    width: 100%
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width: 480px) {
+    .lotties {
+        display: grid;
+        grid-template-columns: auto;
+    }
+}

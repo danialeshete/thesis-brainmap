@@ -6,12 +6,12 @@ const MindMap = () => {
   var w = window.innerWidth;
   var h = 500;
 
-  var svg = d3.select("svg"); //selektiert die svg element mit class (plot) in main.html
-
-  /*  var svg = d3.select("body")      //variable svg soll eine svg element in body kreieren aber kreiert stattdessen zwei auf Meteor+React
+/*   var svg = d3.select("svg"); //selektiert die svg element mit class (plot) in main.html
+ */
+   var svg = d3.select("body")      //variable svg soll eine svg element in body kreieren aber kreiert stattdessen zwei auf Meteor+React
                   .append("svg")
                   .attr("width", w)
-                  .attr("height", h); */
+                  .attr("height", h);
   var ideaText = [];
   var topicText = [];
 
@@ -133,7 +133,6 @@ const MindMap = () => {
 
   return (
     <div>
-      <svg className="plot"></svg>
     </div>
   );
 };

@@ -4,10 +4,12 @@ import MindMap from "./MindMap";
 import NavBar from "./NavBar";
 import Login from "./Login";
 import Register from "./Register";
-
+import Session from "./Session";
+import Draggable from "./Draggable";
 import Banner from "./Banner";
 import Lottie from "react-lottie";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./style.css"
 import {
     Container,
     Navbar,
@@ -35,6 +37,9 @@ class App extends Component {
               <Nav className="ml-auto">
                 <Nav.Link href="/about">About</Nav.Link>
                 <Nav.Link href="/contact">Contact</Nav.Link>
+                <Nav.Link href="/session">Session</Nav.Link>
+                <Nav.Link href="/mindmap">MindMap</Nav.Link>
+                <Nav.Link href="/draggable">Draggable</Nav.Link>
               </Nav>
 
               <Button href="/login" variant="primary">Anmelden</Button>
@@ -45,10 +50,12 @@ class App extends Component {
         <Route exact path="/" component={Banner} />
         <Route  path="/about" component={Banner} />
         <Route  path="/contact" component={Banner} />
+        <Route  path="/session" component={Session} />
+        <Route  path="/mindmap" component={MindMap} />
         <Route  path="/login" component={Login} />
         <Route  path="/register" component={Register} />
+        <Route  path="/draggable" component={Draggable} />
         </Router>
-        <MindMap />
         
       </div>
     );
