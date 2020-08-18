@@ -144,16 +144,19 @@ const Draggable = () => {
     d.fy = null;
   }
 
-  var x = 0;
+  var x = dataset.nodes.length;
   var array = Array();
-
+  console.log(dataset.nodes[x-1])
+  console.log(dataset.nodes[x-1].name)
+  console.log(dataset.nodes.length)
+  
   function add_element_to_nodes() {
-    d3.select
-    dataset.nodes = document.getElementById("text1").value;
-    alert("Element: " + dataset.nodes[x] + " Added at index " + x);
+    console.log("text1: "+document.getElementById("text1").value);
+    dataset.nodes.push("hey");
+    console.log("Element: " + dataset.nodes[x-1] + " Added at index " + x);
     x++;
     document.getElementById("text1").value = "";
-
+    console.log(dataset.nodes);
     
 /*     var e = "<hr/>";
 
