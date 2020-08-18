@@ -148,7 +148,8 @@ const Draggable = () => {
   var array = Array();
 
   function add_element_to_nodes() {
-    dataset.nodes[x] = document.getElementById("text1").value;
+    d3.select
+    dataset.nodes = document.getElementById("text1").value;
     alert("Element: " + dataset.nodes[x] + " Added at index " + x);
     x++;
     document.getElementById("text1").value = "";
