@@ -144,19 +144,27 @@ const Draggable = () => {
     d.fy = null;
   }
 
+/*   $(el).bind(“updateD3”, function() { 
+   console.log('Updating …');
+  })
+  $(el).trigger("updateD3"); // Updating ... */
+
   var x = dataset.nodes.length;
   var array = Array();
-  console.log(dataset.nodes[x-1])
+  console.log(dataset.nodes)
   console.log(dataset.nodes[x-1].name)
   console.log(dataset.nodes.length)
   
   function add_element_to_nodes() {
-    console.log("text1: "+document.getElementById("text1").value);
-    dataset.nodes.push("hey");
+    var text= document.getElementById("text1").value;
+    console.log("text1: "+text);
+    dataset.nodes.push({name: text, x: Math.random() * w, 
+    y: Math.random() * h });
     console.log("Element: " + dataset.nodes[x-1] + " Added at index " + x);
     x++;
     document.getElementById("text1").value = "";
     console.log(dataset.nodes);
+    
     
 /*     var e = "<hr/>";
 
