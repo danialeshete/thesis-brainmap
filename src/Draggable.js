@@ -160,8 +160,6 @@ const Draggable = () => {
     console.log("text1: "+text);
     dataset.nodes.push({name: text, x: Math.random() * w, 
     y: Math.random() * h });
-    console.log("Element: " + dataset.nodes[x-1] + " Added at index " + x);
-    x++;
     document.getElementById("text1").value = "";
     console.log(dataset.nodes);
     
