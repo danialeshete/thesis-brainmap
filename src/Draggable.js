@@ -35,15 +35,15 @@ const Draggable = () => {
       { source: 6, target: 7 },
       { source: 7, target: 8 },
       { source: 8, target: 9 } */
-      {source: 0, target: 1},
-      {source: 0, target: 2},
-      {source: 0, target: 3},
-      {source: 0, target: 4},
-      {source: 0, target: 5},
-      {source: 0, target: 6},
-      {source: 0, target: 7},
-      {source: 0, target: 8},
-      {source: 0, target: 9}
+      { source: 0, target: 1 },
+      { source: 0, target: 2 },
+      { source: 0, target: 3 },
+      { source: 0, target: 4 },
+      { source: 0, target: 5 },
+      { source: 0, target: 6 },
+      { source: 0, target: 7 },
+      { source: 0, target: 8 },
+      { source: 0, target: 9 }
     ]
   };
 
@@ -144,27 +144,58 @@ const Draggable = () => {
     d.fy = null;
   }
 
-/*   $(el).bind(“updateD3”, function() { 
+  /*   $(el).bind(“updateD3”, function() { 
    console.log('Updating …');
   })
   $(el).trigger("updateD3"); // Updating ... */
 
   var x = dataset.nodes.length;
   var array = Array();
-  console.log(dataset.nodes)
-  console.log(dataset.nodes[x-1].name)
-  console.log(dataset.nodes.length)
-  
+  console.log(dataset.nodes);
+  console.log(dataset.edges);
+  console.log(dataset.nodes.length);
+
   function add_element_to_nodes() {
-    var text= document.getElementById("text1").value;
-    console.log("text1: "+text);
-    dataset.nodes.push({name: text, x: Math.random() * w, 
-    y: Math.random() * h });
+    var text = document.getElementById("text1").value;
+    console.log("text1: " + text);
+    dataset.nodes.push({
+      name: text,
+      index: x
+    });
+
+    svg
+      .selectAll("circle")
+      .data(dataset.nodes)
+      .enter()
+      .append("circle")
+      .attr("r", 10)
+      .style("fill", function(d, i) {
+        return colors(i);
+      })
+      .call(
+        d3
+          .drag() //Define what to do on drag events
+          .on("start", dragStarted)
+          .on("drag", dragging)
+          .on("end", dragEnded)
+      );
+    dataset.edges.push({
+      source: dataset.nodes[0],
+      target: dataset.nodes[x]
+    });
+    x++;
+    svg
+      .selectAll("line")
+      .data(dataset.edges)
+      .enter()
+      .append("line")
+      .style("stroke", "#ccc")
+      .style("stroke-width", 1);
     document.getElementById("text1").value = "";
     console.log(dataset.nodes);
-    
-    
-/*     var e = "<hr/>";
+    console.log(dataset.edges);
+
+    /*     var e = "<hr/>";
 
     for (var y = 0; y < dataset.nodes.length; y++) {
       e += "Element " + y + " = " + dataset.nodes[y] + "<br/>";
@@ -176,20 +207,25 @@ const Draggable = () => {
     console.log("Element: " + dataset.edges[x] + " Added at index " + x);
     x++;
     document.getElementById("text1").value = "";
-/*     var e = "<hr/>";
+    /*     var e = "<hr/>";
 
     for (var y = 0; y < nodes.length; y++) {
       e += "Element " + y + " = " + nodes[y] + "<br/>";
     }
     document.getElementById("Result").innerHTML = e; */
   }
-  
+
   return (
     <div>
-      <FormControl type="text" id="text1"></FormControl>
-      <FormControl type="button" id="button1" value="Add" onClick={add_element_to_nodes}></FormControl>
+      <FormControl type="text" id="text1" />
+      <FormControl
+        type="button"
+        id="button1"
+        value="Add"
+        onClick={add_element_to_nodes}
+      />
 
-      <div id="Result"></div> 
+      <div id="Result" />
 
       <Button variant="primary" id="createTopic">
         Topic{" "}
