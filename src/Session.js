@@ -14,10 +14,9 @@ const Session = () => {
     .attr("height", h);
 
   var connections = [];
+  var line;
 
   function drawCircle(x, y, size) {
-    console.log("Drawing circle at", x, y, size);
-
     svg
       .append("circle")
       .attr("class", "click-circle")
@@ -28,19 +27,17 @@ const Session = () => {
       .call(d3.drag().on("drag", dragmove));
 
     connections.push({
-      midpoint_x: (x + size) / 2,
-      midPoint_y: (y + size) / 2
+      midpoint_x: x,
+      midpoint_y: y
     });
-    console.log(connections)
-  }
-  function drawEdges() {
-    svg
+    console.log(connections[connections.length - 1]);
+    line = svg
       .append("line")
       .style("stroke", "black")
-      .attr("x1", 150)
-      .attr("y1", 100)
-      .attr("x2", 250)
-      .attr("y2", 300);
+      .attr("x1", connections[0].midpoint_x)
+      .attr("y1", connections[0].midpoint_y)
+      .attr("x2", x)
+      .attr("y2", y);
   }
 
   function dragmove(d) {
@@ -49,6 +46,7 @@ const Session = () => {
     d3.select(this)
       .attr("cx", x)
       .attr("cy", y);
+    line.attr("x2", x).attr("y2", y);
   }
 
   svg.on("dblclick", function() {

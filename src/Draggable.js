@@ -135,7 +135,7 @@ const Draggable = () => {
     
 
     //Define drag event functions
-        function dragStarted(d) {
+    function dragStarted(d) {
       if (!d3.event.active) force.alphaTarget(0.3).restart();
       d.fx = d.x;
       d.fy = d.y;
