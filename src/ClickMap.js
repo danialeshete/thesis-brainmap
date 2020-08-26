@@ -4,13 +4,15 @@ import { FormControl, Button } from "react-bootstrap";
 import "./ClickMap.css";
 
 const ClickMap = () => {
-  var width = 400,
+  var width = window.innerWidth,
     height = 400,
     root,
-    currentNode;
+    currentNode,charLeng;
 
   var force = d3.layout
     .force()
+    .distance(300)
+    .gravity(0.05)
     .size([width, height])
     .on("tick", tick);
 
@@ -20,8 +22,8 @@ const ClickMap = () => {
     .attr("width", width)
     .attr("height", height);
 
-  var link = svg.selectAll(".link"),
-    node = svg.selectAll(".node");
+  var link = svg.append("g").selectAll(".link"),
+    node = svg.append("g").selectAll("g");
 
   d3.select("body")
     .append("div")
@@ -30,17 +32,19 @@ const ClickMap = () => {
 
   function add() {
     var topic = document.getElementById("topic").value;
+    var size = topic.length;
+
     if (root) {
       var obj = {
         name: topic,
-        size: Math.random() * 10000,
+        size: size*4,
         children: []
       };
       currentNode["children"].push(obj);
     } else {
       root = {
         name: topic,
-        size: Math.random() * 10000,
+        size: size*4,
         children: []
       };
       currentNode = root;
@@ -86,7 +90,6 @@ const ClickMap = () => {
 
     // Update the nodes…
     node = node
-      .selectAll("g")
       .data(nodes, function(d) {
         return d.id;
       })
@@ -95,17 +98,11 @@ const ClickMap = () => {
     // Exit any old nodes.
     node.exit().remove();
 
-    /*Create and place the "blocks" containing the circle and the text */
-
-    var elemEnter = node
+    // Enter any new nodes.
+    node
       .enter()
       .append("g")
-      .attr("transform", function(d) {
-        return "translate(" + d.x + ",80)";
-      });
-    // Enter any new nodes.
-
-    elemEnter
+      .attr("class", "test")
       .append("circle")
       .attr("class", "node")
       .attr("cx", function(d) {
@@ -115,7 +112,7 @@ const ClickMap = () => {
         return d.y;
       })
       .attr("r", function(d) {
-        return Math.sqrt(d.size) / 10 || 4.5;
+        return d.size;
       })
       .style("fill", color)
       .on("mouseover", function(d) {
@@ -130,12 +127,25 @@ const ClickMap = () => {
         d3.select("#tooltip").style("opacity", 0);
       })
       .on("click", click)
-      .append("p")
-      .text(d => {
+      .call(force.drag);
+
+    node
+      .append("text")
+      .text(function(d) {
         return d.name;
       })
-      .style("style")
+      .attr("x", function(d) {
+        return d.x - d.size;
+      })
+      .attr("y", function(d) {
+        return d.y;
+      })
+      .on("click", click)
       .call(force.drag);
+
+    /* node.append("title").text(function(d) {
+      return d.id;
+    }); */
   }
 
   function tick() {
@@ -154,10 +164,20 @@ const ClickMap = () => {
       });
 
     node
+      .selectAll("circle")
       .attr("cx", function(d) {
         return d.x;
       })
       .attr("cy", function(d) {
+        return d.y;
+      });
+
+    node
+      .selectAll("text")
+      .attr("x", function(d) {
+        return d.x - d.size;
+      })
+      .attr("y", function(d) {
         return d.y;
       });
   }
@@ -188,7 +208,7 @@ const ClickMap = () => {
   }
   return (
     <div>
-      <FormControl id="topic" type="text" />
+      <FormControl  id="topic" type="text" />
       <Button onClick={add}>add</Button>
     </div>
   );
