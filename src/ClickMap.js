@@ -7,7 +7,9 @@ const ClickMap = () => {
   var width = window.innerWidth,
     height = 400,
     root,
-    currentNode,charLeng;
+    currentNode,
+    charLeng,
+    padding  = 30;
 
   var force = d3.layout
     .force()
@@ -37,14 +39,14 @@ const ClickMap = () => {
     if (root) {
       var obj = {
         name: topic,
-        size: size*4,
+        size: size * 5,
         children: []
       };
       currentNode["children"].push(obj);
     } else {
       root = {
         name: topic,
-        size: size*4,
+        size: size * 5,
         children: []
       };
       currentNode = root;
@@ -135,17 +137,14 @@ const ClickMap = () => {
         return d.name;
       })
       .attr("x", function(d) {
-        return d.x - d.size;
+        return d.x ;
       })
       .attr("y", function(d) {
         return d.y;
       })
+      .style("fill", "Black")
       .on("click", click)
       .call(force.drag);
-
-    /* node.append("title").text(function(d) {
-      return d.id;
-    }); */
   }
 
   function tick() {
@@ -184,7 +183,6 @@ const ClickMap = () => {
 
   // Color leaf nodes orange, and packages white or blue.
   function color(d) {
-    // hide and show color statement: d._children ? "#3182bd" :
     return d.children.length ? "#c6dbef" : "#fd8d3c";
   }
 
@@ -208,7 +206,7 @@ const ClickMap = () => {
   }
   return (
     <div>
-      <FormControl  id="topic" type="text" />
+      <FormControl id="topic" type="text" />
       <Button onClick={add}>add</Button>
     </div>
   );

@@ -7,6 +7,9 @@ import {
   Form,
   FormControl
 } from "react-bootstrap";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import ClickMap from "./ClickMap";
+import Login from "./Login";
 
 export class Register extends React.Component {
   render() {
@@ -41,15 +44,19 @@ export class Register extends React.Component {
                 <Form.Group controlId="formCheckbox">
                   <Form.Check type="checkbox" label="Accept AGB" />
                 </Form.Group>
-                <Button variant="primary" type="submit">
-                  Start Brainstorming
-                </Button>
-                <Form.Group controlId="formRegister">
-                  <Form.Label>Already have an account?</Form.Label>{" "}
-                  <Button className="mb-1" variant="link" type="submit">
-                    Sign in
+                <Router>
+                  <Button variant="primary" type="submit" href="/clickmap">
+                    Start Brainstorming
                   </Button>
-                </Form.Group>
+                  <Form.Group controlId="formRegister">
+                    <Form.Label>Already have an account?</Form.Label>{" "}
+                    <Button className="mb-1" variant="link" type="submit" href="/login">
+                      Sign in
+                    </Button>
+                  </Form.Group>
+                  <Route path="/ClickMap" component={ClickMap} />
+                  <Route path="/login" component={Login} />
+                </Router>
               </Form>
             </Col>
           </Row>

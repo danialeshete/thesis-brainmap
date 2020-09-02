@@ -10,6 +10,7 @@ import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Register from "./Register";
 import MindMap from "./MindMap";
+import ClickMap from "./ClickMap";
 
 
 export class Banner extends React.Component {
@@ -78,14 +79,14 @@ export class Banner extends React.Component {
               </p>
               <Router>
                 <Button
-                  variant="primary" href="/MindMap">
+                  variant="primary" href="/clickmap">
                   Start Brainstorming
                 </Button>
 
                 <Button className="offset-sm-1" variant="outline-dark" href="/register">
                   Sign Up
                 </Button>
-                <Route path="/MindMap" component={MindMap} />
+                <Route path="/clickmap" component={ClickMap} />
                 <Route path="/register" component={Register} />
               </Router>
             </Col>

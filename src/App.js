@@ -9,6 +9,8 @@ import Draggable from "./Draggable";
 import Banner from "./Banner";
 import Lottie from "react-lottie";
 import ClickMap from "./ClickMap";
+import ForceV3 from "./ForceV3";
+import ForceV5 from "./ForceV3";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
 import { Container, Navbar, Nav, Button } from "react-bootstrap";
@@ -37,6 +39,8 @@ class App extends Component {
                   <Nav.Link href="/mindmap">MindMap</Nav.Link>
                   <Nav.Link href="/draggable">Draggable</Nav.Link>
                   <Nav.Link href="/clickmap">ClickMap</Nav.Link>
+                  <Nav.Link href="/forcev3"> ForceV3 </Nav.Link>
+                  <Nav.Link href="/forcev5"> ForceV5 </Nav.Link>
                 </Nav>
 
                 <Button href="/login" variant="primary">
@@ -57,6 +61,8 @@ class App extends Component {
           <Route path="/register" component={Register} />
           <Route path="/draggable" component={Draggable} />
           <Route path="/clickmap" component={ClickMap} />
+          <Route path="/forcev3" component={ForceV3} />
+          <Route path="/forcev5" component={ForceV5} />
         </Router>
       </div>
     );
