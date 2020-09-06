@@ -1,29 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import * as d3 from "d3";
-import { FormControl, Button } from "react-bootstrap";
+import {
+  FormControl,
+  Button,
+  Container,
+  Col,
+  Row,
+  Modal
+} from "react-bootstrap";
 import "./ClickMap.css";
 
 const ClickMap = () => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   var width = window.innerWidth,
     height = 400,
     root,
     currentNode,
     charLeng,
-    padding  = 30;
+    padding = 30;
 
   var force = d3.layout
     .force()
-    .distance(300)
+    .distance(100)
     .gravity(0.05)
     .size([width, height])
-    .on("tick", tick);
+    .on("tick", tick)
+    .charge(-600);
 
   var svg = d3
     .select("body")
     .append("svg")
     .attr("width", width)
     .attr("height", height);
-
+  /*  .on("dblclick", add());
+   */
   var link = svg.append("g").selectAll(".link"),
     node = svg.append("g").selectAll("g");
 
@@ -33,6 +45,7 @@ const ClickMap = () => {
     .attr("style", "position: absolute; opacity: 0;");
 
   function add() {
+    
     var topic = document.getElementById("topic").value;
     var size = topic.length;
 
@@ -137,7 +150,7 @@ const ClickMap = () => {
         return d.name;
       })
       .attr("x", function(d) {
-        return d.x ;
+        return d.x;
       })
       .attr("y", function(d) {
         return d.y;
@@ -206,8 +219,34 @@ const ClickMap = () => {
   }
   return (
     <div>
-      <FormControl id="topic" type="text" />
-      <Button onClick={add}>add</Button>
+      <Container>
+        <Row>
+          <Col>
+            <Button onClick={handleShow}>add</Button>
+          </Col>
+        </Row>
+      </Container>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Woohoo, you're reading this text in a modal!
+          <FormControl
+            id="topic"
+            type="text"
+            placeholder="Worüber möchtest du brainstormen?"
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={add}>
+            Add
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
