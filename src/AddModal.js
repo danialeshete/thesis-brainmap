@@ -21,14 +21,14 @@ const AddModal = () => {
                 <FormControl
                   id="topic"
                   type="text"
-                  placeholder="About what do you want to brainstorm?"
+                  placeholder="About what do you want to?"
                 />
               </Modal.Body>
               <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
                   Close
                 </Button>
-                <Button variant="primary" onClick={handleClose}>
+                <Button variant="primary" onClick={this.props.add}>
                   Add
                 </Button>
               </Modal.Footer>

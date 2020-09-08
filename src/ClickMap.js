@@ -11,9 +11,9 @@ import {
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 
 import "./ClickMap.css";
-import AddModal from "./AddModal"
 
 const ClickMap = () => {
+  const [show, setShow] = useState(false);
 
   var width = window.innerWidth,
     height = 400,
@@ -45,6 +45,7 @@ const ClickMap = () => {
     .attr("id", "tooltip")
     .attr("style", "position: absolute; opacity: 0;");
 
+  
   function add() {
     var topic = document.getElementById("topic").value;
     var size = topic.length;
@@ -228,11 +229,58 @@ const ClickMap = () => {
                   placeholder="About what do you want to brainstorm?"
           />
             <Button onClick={add}>add</Button>
-            <AddModal />
+            <AddModal onClick={} />
+            
           </Col>
         </Row>
       </Container>
     </div>
   );
 };
+
+
+const AddModal = () => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => {
+      setShow(true);
+      console.log()
+
+    }
+
+  return (
+    <>
+      <Button variant="primary" onClick={handleShow}>
+        Add Topic
+      </Button> 
+
+      <Modal show={show} onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>New Element</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                
+                <FormControl
+                  id="topic"
+                  type="text"
+                  placeholder="About what do you want to?"
+                />
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+                <Button variant="primary" onClick={handleClose}>
+                  Add
+                </Button>
+              </Modal.Footer>
+            </Modal>
+    </>
+  );
+}
+
+
+      
+   
 export default ClickMap;
