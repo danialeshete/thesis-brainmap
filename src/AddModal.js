@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, FormControl } from "react-bootstrap";
 
 const AddModal = () => {
   const [show, setShow] = useState(false);
@@ -10,22 +10,29 @@ const AddModal = () => {
     <>
       <Button variant="primary" onClick={handleShow}>
         Launch demo modal
-      </Button>
+      </Button> 
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
+              <Modal.Header closeButton>
+                <Modal.Title>New Element</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                
+                <FormControl
+                  id="topic"
+                  type="text"
+                  placeholder="About what do you want to brainstorm?"
+                />
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+                <Button variant="primary" onClick={handleClose}>
+                  Add
+                </Button>
+              </Modal.Footer>
+            </Modal>
     </>
   );
 }

@@ -8,12 +8,13 @@ import {
   Row,
   Modal
 } from "react-bootstrap";
+import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+
 import "./ClickMap.css";
+import AddModal from "./AddModal"
 
 const ClickMap = () => {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+
   var width = window.innerWidth,
     height = 400,
     root,
@@ -33,9 +34,9 @@ const ClickMap = () => {
     .select("body")
     .append("svg")
     .attr("width", width)
-    .attr("height", height);
-  /*  .on("dblclick", add());
-   */
+    .attr("height", height);/* 
+    .on("dblclick", handleShow); */
+
   var link = svg.append("g").selectAll(".link"),
     node = svg.append("g").selectAll("g");
 
@@ -45,7 +46,6 @@ const ClickMap = () => {
     .attr("style", "position: absolute; opacity: 0;");
 
   function add() {
-    
     var topic = document.getElementById("topic").value;
     var size = topic.length;
 
@@ -221,32 +221,17 @@ const ClickMap = () => {
     <div>
       <Container>
         <Row>
-          <Col>
-            <Button onClick={handleShow}>add</Button>
+          <Col> 
+          <FormControl
+                  id="topic"
+                  type="text"
+                  placeholder="About what do you want to brainstorm?"
+          />
+            <Button onClick={add}>add</Button>
+            <AddModal />
           </Col>
         </Row>
       </Container>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          Woohoo, you're reading this text in a modal!
-          <FormControl
-            id="topic"
-            type="text"
-            placeholder="Worüber möchtest du brainstormen?"
-          />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={add}>
-            Add
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </div>
   );
 };
