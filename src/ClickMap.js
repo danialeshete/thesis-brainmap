@@ -15,7 +15,7 @@ import { CirclePicker } from "react-color";
 import "./ClickMap.css";
 
 const ClickMap = () => {
-  function init() {
+  
     var width = window.innerWidth,
       height = window.innerHeight - 200,
       root,
@@ -42,8 +42,8 @@ const ClickMap = () => {
       .append("div")
       .attr("id", "tooltip")
       .attr("style", "position: absolute; opacity: 0;");
-  }
-  init();
+  
+  
 
   const [show, setShow] = useState(true);
   const handleClose = () => setShow(false);
