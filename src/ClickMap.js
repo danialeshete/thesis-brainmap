@@ -6,66 +6,83 @@ import {
   Container,
   Col,
   Row,
-  Modal
+  Modal,
+  Form
 } from "react-bootstrap";
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
+import { CirclePicker } from "react-color";
 
 import "./ClickMap.css";
 
 const ClickMap = () => {
-  const [show, setShow] = useState(false);
+  function init() {
+    var width = window.innerWidth,
+      height = window.innerHeight - 200,
+      root,
+      currentNode,
+      charLeng,
+      padding = 30;
 
-  var width = window.innerWidth,
-    height = 400,
-    root,
-    currentNode,
-    charLeng,
-    padding = 30;
+    var force = d3.layout
+      .force()
+      .distance(100)
+      .gravity(0.05)
+      .size([width, height])
+      .on("tick", tick)
+      .charge(-600);
+    var svg = d3
+      .select("#app")
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height);
+    var link = svg.append("g").selectAll(".link"), //create Group of  Lines in SVG
+      node = svg.append("g").selectAll("g");
 
-  var force = d3.layout
-    .force()
-    .distance(100)
-    .gravity(0.05)
-    .size([width, height])
-    .on("tick", tick)
-    .charge(-600);
+    d3.select("#app")
+      .append("div")
+      .attr("id", "tooltip")
+      .attr("style", "position: absolute; opacity: 0;");
+  }
+  init();
 
-  var svg = d3
-    .select("body")
-    .append("svg")
-    .attr("width", width)
-    .attr("height", height);/* 
-    .on("dblclick", handleShow); */
+  const [show, setShow] = useState(true);
+  const handleClose = () => setShow(false);
+  const handleShow = () => {
+    setShow(true);
+  };
+  const onEditNodeSubmit = e => {
+    e.preventDefault();
+    add();
+    handleClose();
+  };
 
-  var link = svg.append("g").selectAll(".link"),
-    node = svg.append("g").selectAll("g");
-
-  d3.select("body")
-    .append("div")
-    .attr("id", "tooltip")
-    .attr("style", "position: absolute; opacity: 0;");
-
-  
   function add() {
     var topic = document.getElementById("topic").value;
-    var size = topic.length;
-
-    if (root) {
-      var obj = {
-        name: topic,
-        size: size * 5,
-        children: []
-      };
-      currentNode["children"].push(obj);
+    var size = topic.length * 5;
+    if (topic != "") {
+      if (root) {
+        var obj = {
+          name: topic,
+          size: size,
+          children: [],
+          colorID: "#00b4d8"
+        };
+        currentNode["children"].push(obj);
+      } else {
+        root = {
+          name: topic,
+          size: size,
+          children: [],
+          colorID: "#caf0f8"
+        };
+        currentNode = root;
+      }
+      update();
+      document.getElementById("topic").value = "";
+      document.getElementById("topic").placeholder =
+        "What are your Ideas to the topic?";
     } else {
-      root = {
-        name: topic,
-        size: size * 5,
-        children: []
-      };
-      currentNode = root;
     }
-    update();
   }
 
   function update() {
@@ -109,7 +126,7 @@ const ClickMap = () => {
       .data(nodes, function(d) {
         return d.id;
       })
-      .style("fill", color);
+      .style("fill", d => d.colorID);
 
     // Exit any old nodes.
     node.exit().remove();
@@ -130,9 +147,8 @@ const ClickMap = () => {
       .attr("r", function(d) {
         return d.size;
       })
-      .style("fill", color)
+      .style("fill", d => d.colorID)
       .on("mouseover", function(d) {
-        console.log(d);
         d3.select("#tooltip")
           .transition()
           .duration(200)
@@ -142,7 +158,7 @@ const ClickMap = () => {
       .on("mouseout", function() {
         d3.select("#tooltip").style("opacity", 0);
       })
-      .on("click", click)
+      .on("click", clickNode)
       .call(force.drag);
 
     node
@@ -157,7 +173,7 @@ const ClickMap = () => {
         return d.y;
       })
       .style("fill", "Black")
-      .on("click", click)
+      .on("click", clickNode)
       .call(force.drag);
   }
 
@@ -197,12 +213,13 @@ const ClickMap = () => {
 
   // Color leaf nodes orange, and packages white or blue.
   function color(d) {
-    return d.children.length ? "#c6dbef" : "#fd8d3c";
+    return d.children.length ? "#a8dadc" : "#a8dadc";
   }
 
   // Toggle children on click.
-  function click(d) {
+  function clickNode(d) {
     currentNode = d;
+    handleShow();
   }
 
   // Returns a list of all nodes under the root.
@@ -218,69 +235,70 @@ const ClickMap = () => {
     recurse(root);
     return nodes;
   }
+  function changeBG() {
+    return document.getElementById("colorPicker").value;
+    //document.body.style.backgroundColor = document.getElementById("colorPicker").value;
+  }
   return (
-    <div>
-      <Container>
-        <Row>
-          <Col> 
+    <Container>
+      <Row>
+        <Col>
           <FormControl
-                  id="topic"
-                  type="text"
-                  placeholder="About what do you want to brainstorm?"
+            id="topic"
+            type="text"
+            placeholder="About what do you want to brainstorm?"
+            //onChange= {document.getElementById("addBtn").disabled = false}
           />
-            <Button onClick={add}>add</Button>
-            <AddModal onClick={} />
-            
-          </Col>
-        </Row>
-      </Container>
-    </div>
+          <Button
+            id="addBtn"
+            onClick={add}
+            type="submit"
+            variant="success"
+            value="add"
+          >
+            Add
+          </Button>
+          <div id="app" />
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>New Element</Modal.Title>
+            </Modal.Header>
+            <EditNode onSubmit={onEditNodeSubmit} />
+            <Modal.Body />
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
-
-const AddModal = () => {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => {
-      setShow(true);
-      console.log()
-
-    }
-
+const EditNode = ({ onSubmit }) => {
   return (
-    <>
-      <Button variant="primary" onClick={handleShow}>
-        Add Topic
-      </Button> 
-
-      <Modal show={show} onHide={handleClose}>
-              <Modal.Header closeButton>
-                <Modal.Title>New Element</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                
-                <FormControl
-                  id="topic"
-                  type="text"
-                  placeholder="About what do you want to?"
-                />
-              </Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                  Close
-                </Button>
-                <Button variant="primary" onClick={handleClose}>
-                  Add
-                </Button>
-              </Modal.Footer>
-            </Modal>
-    </>
+    <Form onSubmit={onSubmit}>
+      <Container>
+        <FormControl
+          id="topic"
+          type="text"
+          placeholder="About what do you want to brainstorm?"
+          //onChange= {document.getElementById("addBtn").disabled = false}
+        />
+        <Button id="addBtn" type="submit" variant="success" value="add">
+          Add
+        </Button>
+        <Button type="submit" variant="info" value="edit">
+          Edit
+        </Button>
+        <Button type="submit" variant="outline-danger" value="delete">
+          Delete
+        </Button>
+      </Container>
+    </Form>
   );
-}
+};
 
-
-      
-   
 export default ClickMap;
