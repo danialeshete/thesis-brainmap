@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as d3 from "d3";
 import {
   FormControl,
@@ -15,7 +15,11 @@ import { CirclePicker } from "react-color";
 import "./ClickMap.css";
 
 const ClickMap = () => {
-  
+
+   React.useEffect(() => {
+    localStorage.setItem('myValueInLocalStorage', root);
+  }, [root]);
+
     var width = window.innerWidth,
       height = window.innerHeight - 200,
       root,
@@ -30,8 +34,11 @@ const ClickMap = () => {
       .size([width, height])
       .on("tick", tick)
       .charge(-600);
+
     var svg = d3
-      .select("#app")
+      .select("body")
+      .append("div")
+      .attr("class", "container")
       .append("svg")
       .attr("width", width)
       .attr("height", height);
@@ -42,20 +49,7 @@ const ClickMap = () => {
       .append("div")
       .attr("id", "tooltip")
       .attr("style", "position: absolute; opacity: 0;");
-  
-  
-
-  const [show, setShow] = useState(true);
-  const handleClose = () => setShow(false);
-  const handleShow = () => {
-    setShow(true);
-  };
-  const onEditNodeSubmit = e => {
-    e.preventDefault();
-    add();
-    handleClose();
-  };
-
+ 
   function add() {
     var topic = document.getElementById("topic").value;
     var size = topic.length * 5;
@@ -135,7 +129,7 @@ const ClickMap = () => {
     node
       .enter()
       .append("g")
-      .attr("class", "test")
+      .attr("class", "circle")
       .append("circle")
       .attr("class", "node")
       .attr("cx", function(d) {
@@ -219,7 +213,6 @@ const ClickMap = () => {
   // Toggle children on click.
   function clickNode(d) {
     currentNode = d;
-    handleShow();
   }
 
   // Returns a list of all nodes under the root.
@@ -239,6 +232,138 @@ const ClickMap = () => {
     return document.getElementById("colorPicker").value;
     //document.body.style.backgroundColor = document.getElementById("colorPicker").value;
   }
+  function del() {
+    var nodes = flatten(root),
+      links = d3.layout.tree().links(nodes);
+    var index = nodes.indexOf(currentNode);
+    nodes.splice(index, 1);
+
+    // Restart the force layout.
+    force
+      .nodes(nodes)
+      .links(links)
+      .start();
+
+    // Update the links…
+    link = link.data(links, function(d) {
+      return currentNode.target.id;
+    });
+
+    // Exit any old links.
+    link.exit().remove();
+
+    // Enter any new links.
+    link
+      .enter()
+      .insert("line", ".node")
+      .attr("class", "link")
+      .attr("x1", function(d) {
+        return currentNode.source.x;
+      })
+      .attr("y1", function(d) {
+        return currentNode.source.y;
+      })
+      .attr("x2", function(d) {
+        return currentNode.target.x;
+      })
+      .attr("y2", function(d) {
+        return currentNode.target.y;
+      });
+
+    // Update the nodes…
+    node = node
+      .data(nodes, function(d) {
+        return currentNode.id;
+      })
+      .style("fill", currentNode => currentNode.colorID);
+
+    // Exit any old nodes.
+    node.exit().remove();
+
+    // Enter any new nodes.
+    node
+      .enter()
+      .append("g")
+      .attr("class", "circle")
+      .append("circle")
+      .attr("class", "node")
+      .attr("cx", function(currentNode) {
+        return currentNode.x;
+      })
+      .attr("cy", function(currentNode) {
+        return currentNode.y;
+      })
+      .attr("r", function(currentNode) {
+        return currentNode.size;
+      })
+      .style("fill", currentNode => currentNode.colorID)
+      .on("mouseover", function(currentNode) {
+        d3.select("#tooltip")
+          .transition()
+          .duration(200)
+          .style("opacity", 1)
+          .text(currentNode.name);
+      })
+      .on("mouseout", function() {
+        d3.select("#tooltip").style("opacity", 0);
+      })
+      .on("click", clickNode)
+      .call(force.drag);
+
+    node
+      .append("text")
+      .text(function(currentNode) {
+        return currentNode.name;
+      })
+      .attr("x", function(currentNode) {
+        return currentNode.x;
+      })
+      .attr("y", function(currentNode) {
+        return currentNode.y;
+      })
+      .style("fill", "Black")
+      .on("click", clickNode)
+      .call(force.drag);
+  }
+
+  function edit() {
+    var topic = document.getElementById("topic").value;
+    if (topic != "") {
+      var nodes = flatten(root),
+        links = d3.layout.tree().links(nodes);
+
+      var index = nodes.indexOf(currentNode);
+
+      nodes[index].name = topic;
+      console.log(nodes);
+      //restart
+      node = node.data(nodes);
+
+      var insert = node.enter().append("g");
+
+      insert.insert("circle").attr("class", "circle");
+
+      insert
+        .insert("text")
+        .attr("class", "node")
+        .text(function(n) {
+          return n.name;
+        });
+
+      node.exit().remove();
+
+      link = link.data(links);
+
+      link
+        .enter()
+        .insert("line", ".node")
+        .attr("class", "link");
+      link.exit().remove();
+
+      force.start();
+    }
+  }
+
   return (
     <Container>
       <Row>
@@ -258,46 +383,20 @@ const ClickMap = () => {
           >
             Add
           </Button>
-          <div id="app" />
-          <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>New Element</Modal.Title>
-            </Modal.Header>
-            <EditNode onSubmit={onEditNodeSubmit} />
-            <Modal.Body />
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
-            </Modal.Footer>
-          </Modal>
+          <Button onClick={edit} id="editBtn" type="submit" variant="info">
+            Edit
+          </Button>
+          <Button
+            onClick={del}
+            id="delBtn"
+            type="submit"
+            variant="outline-danger"
+          >
+            Delete
+          </Button>
         </Col>
       </Row>
     </Container>
-  );
-};
-
-const EditNode = ({ onSubmit }) => {
-  return (
-    <Form onSubmit={onSubmit}>
-      <Container>
-        <FormControl
-          id="topic"
-          type="text"
-          placeholder="About what do you want to brainstorm?"
-          //onChange= {document.getElementById("addBtn").disabled = false}
-        />
-        <Button id="addBtn" type="submit" variant="success" value="add">
-          Add
-        </Button>
-        <Button type="submit" variant="info" value="edit">
-          Edit
-        </Button>
-        <Button type="submit" variant="outline-danger" value="delete">
-          Delete
-        </Button>
-      </Container>
-    </Form>
   );
 };
 
