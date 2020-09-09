@@ -15,41 +15,40 @@ import { CirclePicker } from "react-color";
 import "./ClickMap.css";
 
 const ClickMap = () => {
-
-   React.useEffect(() => {
-    localStorage.setItem('myValueInLocalStorage', root);
+  React.useEffect(() => {
+    localStorage.setItem("myValueInLocalStorage", root);
   }, [root]);
 
-    var width = window.innerWidth,
-      height = window.innerHeight - 200,
-      root,
-      currentNode,
-      charLeng,
-      padding = 30;
+  var width = window.innerWidth,
+    height = window.innerHeight - 200,
+    root,
+    currentNode,
+    charLeng,
+    padding = 30;
 
-    var force = d3.layout
-      .force()
-      .distance(100)
-      .gravity(0.05)
-      .size([width, height])
-      .on("tick", tick)
-      .charge(-600);
+  var force = d3.layout
+    .force()
+    .distance(100)
+    .gravity(0.05)
+    .size([width, height])
+    .on("tick", tick)
+    .charge(-600);
 
-    var svg = d3
-      .select("body")
-      .append("div")
-      .attr("class", "container")
-      .append("svg")
-      .attr("width", width)
-      .attr("height", height);
-    var link = svg.append("g").selectAll(".link"), //create Group of  Lines in SVG
-      node = svg.append("g").selectAll("g");
+  var svg = d3
+    .select("body")
+    .append("div")
+    .attr("class", "container")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height);
+  var link = svg.append("g").selectAll(".link"), //create Group of  Lines in SVG
+    node = svg.append("g").selectAll("g");
 
-    d3.select("#app")
-      .append("div")
-      .attr("id", "tooltip")
-      .attr("style", "position: absolute; opacity: 0;");
- 
+  d3.select("#app")
+    .append("div")
+    .attr("id", "tooltip")
+    .attr("style", "position: absolute; opacity: 0;");
+
   function add() {
     var topic = document.getElementById("topic").value;
     var size = topic.length * 5;
@@ -238,92 +237,7 @@ const ClickMap = () => {
     var index = nodes.indexOf(currentNode);
     nodes.splice(index, 1);
 
-    // Restart the force layout.
-    force
-      .nodes(nodes)
-      .links(links)
-      .start();
-
-    // Update the links…
-    link = link.data(links, function(d) {
-      return currentNode.target.id;
-    });
-
-    // Exit any old links.
-    link.exit().remove();
-
-    // Enter any new links.
-    link
-      .enter()
-      .insert("line", ".node")
-      .attr("class", "link")
-      .attr("x1", function(d) {
-        return currentNode.source.x;
-      })
-      .attr("y1", function(d) {
-        return currentNode.source.y;
-      })
-      .attr("x2", function(d) {
-        return currentNode.target.x;
-      })
-      .attr("y2", function(d) {
-        return currentNode.target.y;
-      });
-
-    // Update the nodes…
-    node = node
-      .data(nodes, function(d) {
-        return currentNode.id;
-      })
-      .style("fill", currentNode => currentNode.colorID);
-
-    // Exit any old nodes.
-    node.exit().remove();
-
-    // Enter any new nodes.
-    node
-      .enter()
-      .append("g")
-      .attr("class", "circle")
-      .append("circle")
-      .attr("class", "node")
-      .attr("cx", function(currentNode) {
-        return currentNode.x;
-      })
-      .attr("cy", function(currentNode) {
-        return currentNode.y;
-      })
-      .attr("r", function(currentNode) {
-        return currentNode.size;
-      })
-      .style("fill", currentNode => currentNode.colorID)
-      .on("mouseover", function(currentNode) {
-        d3.select("#tooltip")
-          .transition()
-          .duration(200)
-          .style("opacity", 1)
-          .text(currentNode.name);
-      })
-      .on("mouseout", function() {
-        d3.select("#tooltip").style("opacity", 0);
-      })
-      .on("click", clickNode)
-      .call(force.drag);
-
-    node
-      .append("text")
-      .text(function(currentNode) {
-        return currentNode.name;
-      })
-      .attr("x", function(currentNode) {
-        return currentNode.x;
-      })
-      .attr("y", function(currentNode) {
-        return currentNode.y;
-      })
-      .style("fill", "Black")
-      .on("click", clickNode)
-      .call(force.drag);
+    update();
   }
 
   function edit() {
@@ -331,36 +245,11 @@ const ClickMap = () => {
     if (topic != "") {
       var nodes = flatten(root),
         links = d3.layout.tree().links(nodes);
-
       var index = nodes.indexOf(currentNode);
 
       nodes[index].name = topic;
-      console.log(nodes);
-      //restart
-      node = node.data(nodes);
 
-      var insert = node.enter().append("g");
-
-      insert.insert("circle").attr("class", "circle");
-
-      insert
-        .insert("text")
-        .attr("class", "node")
-        .text(function(n) {
-          return n.name;
-        });
-
-      node.exit().remove();
-
-      link = link.data(links);
-
-      link
-        .enter()
-        .insert("line", ".node")
-        .attr("class", "link");
-      link.exit().remove();
-
-      force.start();
+      update();
     }
   }
 
