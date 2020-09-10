@@ -41,7 +41,7 @@ const ClickMap = () => {
     .append("svg")
     .attr("width", width)
     .attr("height", height);
-  var link = svg.append("g").selectAll(".link"), //create Group of  Lines in SVG
+  const link = svg.append("g").selectAll(".link"), //create Group of  Lines in SVG
     node = svg.append("g").selectAll("g");
 
   d3.select("#app")
@@ -54,19 +54,21 @@ const ClickMap = () => {
     var size = topic.length * 5;
     if (topic != "") {
       if (root) {
+        //child
         var obj = {
           name: topic,
           size: size,
           children: [],
-          colorID: "#00b4d8"
+          colorID: "#3182bd"
         };
         currentNode["children"].push(obj);
       } else {
+        //parent
         root = {
           name: topic,
           size: size,
           children: [],
-          colorID: "#caf0f8"
+          colorID: "#a8dadc"
         };
         currentNode = root;
       }
@@ -78,6 +80,15 @@ const ClickMap = () => {
     }
   }
 
+  function collapse(currentNode) {
+    if (currentNode.children) {
+      currentNode._children = currentNode.children;
+      currentNode._children.forEach(collapse);
+      currentNode.children = null;
+    }
+  }
+
+  //root.children.forEach(collapse);
   function update() {
     var nodes = flatten(root),
       links = d3.layout.tree().links(nodes);
@@ -212,6 +223,9 @@ const ClickMap = () => {
   // Toggle children on click.
   function clickNode(d) {
     currentNode = d;
+    document.getElementById("topic").placeholder = `"${
+      currentNode.name
+    }" is now active`;
   }
 
   // Returns a list of all nodes under the root.
@@ -235,9 +249,14 @@ const ClickMap = () => {
     var nodes = flatten(root),
       links = d3.layout.tree().links(nodes);
     var index = nodes.indexOf(currentNode);
+
     nodes.splice(index, 1);
 
-    update();
+    links = links.filter(function(l) {
+      return l.source !== currentNode && l.target !== currentNode;
+    });
+    document.getElementById("topic").value = "";
+    restart();
   }
 
   function edit() {
@@ -249,8 +268,59 @@ const ClickMap = () => {
 
       nodes[index].name = topic;
 
-      update();
+      restart();
     }
+    document.getElementById("topic").value = "";
+  }
+  function restart() {
+    var nodes = flatten(root),
+      links = d3.layout.tree().links(nodes);
+    // Update the links…
+    link = link.data(links, function(d) {
+      return d.target.id;
+    });
+
+    // Exit any old links.
+    link.exit().remove();
+
+    // Enter any new links.
+    link
+      .enter()
+      .insert("line", ".node")
+      .attr("class", "link");
+
+    // Update the nodes…
+    node = node
+      .data(nodes, function(d) {
+        return d.id;
+      })
+      .style("fill", d => d.colorID);
+
+    // Exit any old nodes.
+    node.exit().remove();
+
+    // Enter any new nodes.
+    node
+      .enter()
+      .append("g")
+      .attr("class", "circle")
+      .append("circle")
+      .attr("class", "node")
+      .on("click", clickNode)
+      .call(force.drag);
+
+    node
+      .append("text")
+      .text(function(d) {
+        return currentNode.name;
+      })
+      .call(force.drag);
+
+    // Restart the force layout.
+    force
+      .nodes(nodes)
+      .links(links)
+      .start();
   }
 
   return (
