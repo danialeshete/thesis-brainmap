@@ -44,6 +44,7 @@ b {
 a {
     font-family: "Roboto Black", sans-serif;
     font-size: 16px;
+    color: #5DB5AB;
 }
 
 
@@ -56,15 +57,15 @@ h1.span {
 
 
 body {
-    background-color: #F0F0F0;
+    background-color: #F9F3F1;
 }
 
 b {
-    color: #3C64B1;
+    color: #5DB5AB;
 }
 
 p {
-    color: #606060;
+    color: #1D1F20;
 }
 
 .btn {
@@ -73,10 +74,10 @@ p {
 }
 
 .btn-primary {
-    background-color: #3C64B1 !important;
+    background-color: #5DB5AB !important;
 }
 .btn-link{
-    color: #3C64B1;
+    color: #1D1F20;
 }
 
 .lotties {

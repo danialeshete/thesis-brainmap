@@ -48,12 +48,29 @@ const ClickMap = () => {
     link = svg.selectAll(".link"),
     text = svg.selectAll(".text");
 
+  window.addEventListener("keydown", event => {
+    if (event.code === "Enter") {
+      add();
+    }
+  });
+
+  window.addEventListener("keydown", event => {
+    if (event.code === "Backspace" && event.metaKey) {
+      del();
+    }
+  });
+  window.addEventListener("keydown", event => {
+    if (event.code === "KeyE" && event.ctrlKey) {
+      edit();
+    }
+  });
+
   function add() {
     var topic = document.getElementById("topic").value;
     if (topic != "") {
       var node = {
         text: topic,
-        colorID: "#00b4d8"
+        colorID: "#F8D2CA"
       };
       if (nodes.length > 0) {
         links.push({ source: node, target: currentNode });

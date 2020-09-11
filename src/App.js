@@ -17,6 +17,7 @@ import { Container, Navbar, Nav, Button } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./NavBar.css";
 import * as d3 from "d3";
+import logo from "../assets/"
 
 class App extends Component {
   render() {
@@ -26,21 +27,12 @@ class App extends Component {
           <Container>
             <Navbar expand="lg" variant="light">
               <Navbar.Brand href="/">
-                <h1>
-                  Brain<span style={{ fontWeight: 100 }}>Map</span>
-                </h1>
+                <img src={logo} alt="Logo" />;
               </Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ml-auto">
-                  <Nav.Link href="/about">About</Nav.Link>
-                  <Nav.Link href="/contact">Contact</Nav.Link>
-                  <Nav.Link href="/session">Session</Nav.Link>
-                  <Nav.Link href="/mindmap">MindMap</Nav.Link>
-                  <Nav.Link href="/draggable">Draggable</Nav.Link>
                   <Nav.Link href="/clickmap">ClickMap</Nav.Link>
-                  <Nav.Link href="/forcev3"> ForceV3 </Nav.Link>
-                  <Nav.Link href="/forcev5"> ForceV5 </Nav.Link>
                 </Nav>
 
                 <Button href="/login" variant="primary">
