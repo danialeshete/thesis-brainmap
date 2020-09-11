@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+import logo from "./logo_light_wname.svg";
 import MindMap from "./MindMap";
 import NavBar from "./NavBar";
 import Login from "./Login";
@@ -17,7 +17,6 @@ import { Container, Navbar, Nav, Button } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./NavBar.css";
 import * as d3 from "d3";
-import logo from "../assets/"
 
 class App extends Component {
   render() {
@@ -27,7 +26,7 @@ class App extends Component {
           <Container>
             <Navbar expand="lg" variant="light">
               <Navbar.Brand href="/">
-                <img src={logo} alt="Logo" />;
+                <img src={logo} alt="Logo" />
               </Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">

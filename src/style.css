@@ -87,6 +87,9 @@ p {
 .click-circle {
     fill: skyblue;
 }
+.navbar{
+  background-color: F9F3F1 !important;
+}
 
 .plot {
     
@@ -96,6 +99,7 @@ p {
     height: 800px;
     width: 100%
 }
+
 
 @media only screen and (min-device-width : 320px) and (max-device-width: 480px) {
     .lotties {
