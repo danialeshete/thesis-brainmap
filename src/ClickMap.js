@@ -9,8 +9,6 @@ import {
   Modal,
   Form
 } from "react-bootstrap";
-import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
-import { CirclePicker } from "react-color";
 
 import "./ClickMap.css";
 
@@ -19,36 +17,32 @@ const ClickMap = () => {
     localStorage.setItem("myValueInLocalStorage", root);
   }, [root]);
 
-  const handleSubmit = e => {
-   
-      if (action == "add") {
-        console.log(action)
-        add();
-      } else if (action == "edit") {
-        console.log(action)
-        edit();
-      }
-    
-    e.preventDefault();
-  };
+  function handleKeyPress(e) {
+    if (action == "add" && e.key === "Enter") {
+      console.log(action);
+      add();
+    } else if (action == "edit" && e.key === "Enter") {
+      console.log(action);
+      edit();
+    }
+  }
 
   function changeActionToAdd() {
     action = "add";
-    console.log(action)
+    document.getElementById("topic").focus();
   }
+
   function changeActionToEdit() {
     action = "edit";
-    console.log(action)
+    document.getElementById("topic").focus();
   }
 
   var width = window.innerWidth,
-    height = window.innerHeight - 200,
+    height = window.innerHeight,
     currentNode,
     index,
-    action = "add",
-    charLeng,
-    handleEdit,
-    padding = 30;
+    radius = 20,
+    action = "add";
 
   var force = d3.layout
     .force()
@@ -78,17 +72,6 @@ const ClickMap = () => {
       add();
     }
   });
-  /*
-  window.addEventListener("keydown", event => {
-    if (event.code === "Backspace" && event.metaKey) {
-      del();
-    }
-  });
-  window.addEventListener("keydown", event => {
-    if (event.code === "KeyE" && event.ctrlKey) {
-      edit();
-    }
-  }); */
 
   function add() {
     document.getElementById("topic").focus();
@@ -128,7 +111,10 @@ const ClickMap = () => {
     text
       .enter()
       .insert("text")
-      .attr("class", "text");
+      .attr("class", "text")
+      .attr("text-anchor", "middle")
+      .on("click", clickNode)
+      .call(force.drag);
     text.exit().remove();
 
     // Update Links
@@ -138,7 +124,6 @@ const ClickMap = () => {
       .insert("line", ".node")
       .attr("class", "link");
     link.exit().remove();
-
     force.start();
   }
 
@@ -160,10 +145,16 @@ const ClickMap = () => {
     node
       .style("fill", d => d.colorID)
       .attr("cx", function(d) {
-        return d.x;
+        return (d.x = Math.max(
+          radius,
+          Math.min(width - d.text.length * 5, d.x)
+        ));
       })
       .attr("cy", function(d) {
-        return d.y;
+        return (d.y = Math.max(
+          radius,
+          Math.min(height - d.text.length * 5, d.y)
+        ));
       })
       .attr("r", function(d) {
         return d.text.length * 5;
@@ -191,7 +182,6 @@ const ClickMap = () => {
     document.getElementById("topic").placeholder = `"${
       currentNode.text
     }" is now active`;
-    document.getElementById("topic").focus();
   }
 
   function changeBG() {
@@ -230,54 +220,61 @@ const ClickMap = () => {
       }" is now active`;
     }
   }
-
+  force.on("end", function() {
+    localStorage.setItem("savedNodes",JSON.stringify(nodes));
+  });
+  
+  //id="form" onSubmit={handleSubmit}
   return (
     <Container>
-      <Row className="pt-3">
+      <Row className="pt-3 menu">
         <Col>
-          <Form id="form" onSubmit={handleSubmit}>
-            <Button
-              className="m-3"
-              id="addBtn"
-              onClick={changeActionToAdd}
-              type="submit"
-              variant="success"
-            >
-              Add
-            </Button>
-            <Button
-              className="m-3"
-              onClick={changeActionToEdit}
-              id="editBtn"
-              
-              variant="info"
-            >
-              Edit
-            </Button>
-            <Button
-              onClick={del}
-              id="delBtn"
-              type="submit"
-              variant="outline-danger"
-              className="m-3"
-            >
-              Delete
-            </Button>
-            <Button
-              onClick={window.print}
-              type="submit"
-              variant="success"
-              className="m-3"
-            >
-              Print
-            </Button>
-            <FormControl
-              id="topic"
-              type="text"
-              placeholder="What do you want to brainstorm about?"
-              //onChange= {document.getElementById("addBtn").disabled = false}
-            />
-          </Form>
+          <Button
+            className="m-2"
+            id="addBtn"
+            onClick={changeActionToAdd}
+            type="submit"
+            variant="primary"
+          >
+            Add
+          </Button>
+          <Button
+            className="m-2"
+            onClick={changeActionToEdit}
+            id="editBtn"
+            variant="secondary"
+          >
+            Edit
+          </Button>
+          <Button
+            onClick={del}
+            id="delBtn"
+            type="submit"
+            variant="danger"
+            className="m-2"
+          >
+            Delete
+          </Button>
+          <Button
+            onClick={window.print}
+            type="submit"
+            variant="info"
+            className="m-2"
+          >
+            Export to PDF
+          </Button>
+          
+        </Col>
+      </Row>
+      <Row className="menu_input">
+        <Col>
+          <FormControl
+            id="topic"
+            type="text"
+            onKeyPress={handleKeyPress}
+            placeholder="What do you want to brainstorm about?"
+            //onChange= {document.getElementById("addBtn").disabled = false}
+          />
         </Col>
       </Row>
     </Container>

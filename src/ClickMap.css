@@ -16,3 +16,32 @@
    text-align: center;
  }
  
+ .menu{
+   padding-bottom: 1px;
+   margin-bottom: 10px;
+   border-bottom: 2px solid !important;
+ }
+ .menu_input{
+      width: 70%;
+  }
+#addBtn {
+    background-color: #5DB5AB !important;
+    border-color: #5DB5AB !important;
+}
+.btn-secondary{
+  background-color: #C28C7E !important;
+  border-color: #C28C7E !important;
+}
+.btn-info{
+  background-color: #1D1F20 !important;
+  border-color: #1D1F20 !important;
+}
+
+ @media only screen and (max-width: 834px) {
+   .menu_input{
+      width: 100%;
+      
+    }
+
+    
+}

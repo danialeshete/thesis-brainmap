@@ -98,15 +98,15 @@ p {
   background-color: #F9F3F1 !important;
 }
 
-    .btn-brainmap {
-      background-color: #5DB5AB;
-      color: #F9F3F1;
-    }
+.btn-brainmap {
+   background-color: #5DB5AB;
+  color: #F9F3F1;
+ }
 
-    .btn-xxl {
-      padding: 1rem 1rem;
-      font-size: 2rem;
-    }
+ .btn-xxl {
+  padding: 1rem 1rem;
+  font-size: 2rem;
+ }
 
 
 
