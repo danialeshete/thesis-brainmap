@@ -2,20 +2,21 @@ h1, p {
   font-family: Lato;
 }
 h1 {
-    font-family: 'Roboto Black', sans-serif;
+    font-family: 'Roboto Bold', sans-serif;
     font-weight: 900;
-    font-size: 36px;
-    color: black;
+    font-size: 64px;
+    color: #1D1F20;
 }
 
 h2 {
-    font-family: "Roboto Black", sans-serif;
-    font-weight: 900;
-    font-size: 24px;
+    font-family: "Roboto Thin", sans-serif;
+    font-weight: 200;
+    font-size: 35px;
 }
 
 h3 {
-    font-family: "Roboto Regular", sans-serif;
+    font-family: "Roboto Thin", sans-serif;
+    font-weight: 200;
     font-size: 24px;
 }
 
@@ -44,7 +45,7 @@ b {
 a {
     font-family: "Roboto Black", sans-serif;
     font-size: 16px;
-    color: #5DB5AB;
+    color: #1D1F20;
 }
 
 
@@ -59,9 +60,12 @@ h1.span {
 body {
     background-color: #F9F3F1;
 }
+#navbar_banner{
+  background-color: #F9F3F1 !important ;
+}
 
 b {
-    color: #5DB5AB;
+    color: #1D1F20;
 }
 
 p {
@@ -69,7 +73,7 @@ p {
 }
 
 .btn {
-    border-radius: 0 !important;
+    border-radius: 3rem !important;
 
 }
 
@@ -79,7 +83,9 @@ p {
 .btn-link{
     color: #1D1F20;
 }
-
+#banner-container{
+  background-color: white !important;
+}
 .lotties {
     display: grid;
     grid-template-columns: auto auto;
@@ -88,17 +94,19 @@ p {
     fill: skyblue;
 }
 .navbar{
-  background-color: F9F3F1 !important;
+  background-color: #F9F3F1 !important;
 }
 
-.plot {
-    
-    position: relative;
-    top: 0;
-    left: 0;
-    height: 800px;
-    width: 100%
-}
+    .btn-brainmap {
+      background-color: #5DB5AB;
+      color: #F9F3F1;
+    }
+
+    .btn-xxl {
+      padding: 1rem 1rem;
+      font-size: 3rem;
+    }
+
 
 
 @media only screen and (min-device-width : 320px) and (max-device-width: 480px) {

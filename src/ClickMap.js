@@ -19,11 +19,25 @@ const ClickMap = () => {
     localStorage.setItem("myValueInLocalStorage", root);
   }, [root]);
 
+  const handleSubmit = e => {
+    var topic = document.getElementById("topic").value;
+    if (topic != "") {
+      if (handleEdit == true) {
+        edit();
+        console.log(nodes);
+        return handleEdit;
+      }
+    }
+    console.log(nodes);
+    e.preventDefault();
+  };
+
   var width = window.innerWidth,
     height = window.innerHeight - 200,
     currentNode,
     index,
     charLeng,
+    handleEdit,
     padding = 30;
 
   var force = d3.layout
@@ -53,7 +67,7 @@ const ClickMap = () => {
       add();
     }
   });
-
+  /*
   window.addEventListener("keydown", event => {
     if (event.code === "Backspace" && event.metaKey) {
       del();
@@ -63,9 +77,10 @@ const ClickMap = () => {
     if (event.code === "KeyE" && event.ctrlKey) {
       edit();
     }
-  });
+  }); */
 
   function add() {
+    document.getElementById("topic").focus();
     var topic = document.getElementById("topic").value;
     if (topic != "") {
       var node = {
@@ -165,6 +180,7 @@ const ClickMap = () => {
     document.getElementById("topic").placeholder = `"${
       currentNode.text
     }" is now active`;
+    document.getElementById("topic").focus();
   }
 
   function changeBG() {
@@ -172,19 +188,23 @@ const ClickMap = () => {
     //document.body.style.backgroundColor = document.getElementById("colorPicker").value;
   }
   function del() {
-    nodes.splice(index, 1);
-    links = links.filter(function(l) {
-      return l.source !== currentNode && l.target !== currentNode;
-    });
+    document.getElementById("topic").focus();
+    if (currentNode != undefined) {
+      nodes.splice(index, 1);
+      links = links.filter(function(l) {
+        return l.source !== currentNode && l.target !== currentNode;
+      });
 
-    update();
-    document.getElementById("topic").value = "";
-    document.getElementById("topic").placeholder =
-      "What are your Ideas to the topic?";
-    currentNode = nodes[0];
+      update();
+      document.getElementById("topic").value = "";
+      document.getElementById("topic").placeholder =
+        "What are your Ideas to the topic?";
+      currentNode = nodes[0];
+    }
   }
 
   function edit() {
+    document.getElementById("topic").focus();
     var topic = document.getElementById("topic").value;
     if (topic != "") {
       var index = nodes.indexOf(currentNode);
@@ -203,32 +223,28 @@ const ClickMap = () => {
     <Container>
       <Row>
         <Col>
-          <FormControl
-            id="topic"
-            type="text"
-            placeholder="About what do you want to brainstorm?"
-            //onChange= {document.getElementById("addBtn").disabled = false}
-          />
-          <Button
-            id="addBtn"
-            onClick={add}
-            type="submit"
-            variant="success"
-            value="add"
-          >
-            Add
-          </Button>
-          <Button onClick={edit} id="editBtn" type="submit" variant="info">
-            Edit
-          </Button>
-          <Button
-            onClick={del}
-            id="delBtn"
-            type="submit"
-            variant="outline-danger"
-          >
-            Delete
-          </Button>
+          <Form id="form" onSubmit={handleSubmit}>
+            <FormControl
+              id="topic"
+              type="text"
+              placeholder="About what do you want to brainstorm?"
+              //onChange= {document.getElementById("addBtn").disabled = false}
+            />
+            <Button id="addBtn" onClick={add} type="submit" variant="success">
+              Add
+            </Button>
+            <Button onClick={edit} id="editBtn" type="submit" variant="info">
+              Edit
+            </Button>
+            <Button
+              onClick={del}
+              id="delBtn"
+              type="submit"
+              variant="outline-danger"
+            >
+              Delete
+            </Button>
+          </Form>
         </Col>
       </Row>
     </Container>

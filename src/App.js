@@ -24,22 +24,15 @@ class App extends Component {
       <div>
         <Router>
           <Container>
-            <Navbar expand="lg" variant="light">
+            <Navbar expand="lg" id="navbar_banner">
               <Navbar.Brand href="/">
                 <img src={logo} alt="Logo" />
               </Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ml-auto">
-                  <Nav.Link href="/clickmap">ClickMap</Nav.Link>
+                  <a href="/login">Login</a> |<a href="/register">Sign up</a>
                 </Nav>
-
-                <Button href="/login" variant="primary">
-                  Anmelden
-                </Button>
-                <Button href="/register" variant="outline-dark">
-                  Registrieren
-                </Button>
               </Navbar.Collapse>
             </Navbar>
           </Container>
