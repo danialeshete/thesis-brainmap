@@ -10,6 +10,7 @@ import Register from "./Register";
 import MindMap from "./MindMap";
 import ClickMap from "./ClickMap";
 
+
 export class Banner extends React.Component {
   constructor(props) {
     super(props);
@@ -31,15 +32,7 @@ export class Banner extends React.Component {
   }
 
   render() {
-    const defaultOptions = {
-      loop: true,
-      autoplay: true,
-      animationData: animationData,
-      rendererSettings: {
-        preserveAspectRatio: "xMidYMid slice",
-        background: "transparent"
-      }
-    };
+    
     return (
       <div>
         <Container id="banner-container">
@@ -62,10 +55,9 @@ export class Banner extends React.Component {
               <Route path="/clickmap" component={ClickMap} />
               <Route path="/register" component={Register} />
             </Router>
+            <img src={"../assets/working-man.png"} />
           </Row>
-          <Row className="lottie">
-            <Lottie options={defaultOptions} />
-          </Row>
+          
         </Container>
       </div>
     );

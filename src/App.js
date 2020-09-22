@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import logo from "./logo_light_wname.svg";
+import { ReactComponent as Logo } from './logo_light_wname.svg';
 import MindMap from "./MindMap";
 import NavBar from "./NavBar";
 import Login from "./Login";
@@ -26,7 +26,7 @@ class App extends Component {
           <Container>
             <Navbar expand="lg" id="navbar_banner">
               <Navbar.Brand href="/">
-                <img src={logo} alt="Logo" />
+                <Logo/>
               </Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
