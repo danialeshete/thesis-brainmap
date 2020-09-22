@@ -14,7 +14,7 @@ import "./ClickMap.css";
 
 const ClickMap = () => {
   useEffect(() => {
-    update();
+    console.log(localStorage.getItem("savedNodes"))
   }, []);
 
   function handleKeyPress(e) {
@@ -67,11 +67,7 @@ const ClickMap = () => {
     link = svg.selectAll(".link"),
     text = svg.selectAll(".text");
 
-  window.addEventListener("keydown", event => {
-    if (event.code === "Enter") {
-      add();
-    }
-  });
+
 
   function add() {
     document.getElementById("topic").focus();
