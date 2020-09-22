@@ -79,12 +79,13 @@ p {
 
 .btn-primary {
     background-color: #5DB5AB !important;
+    border-color: #5DB5AB !important;
 }
 .btn-link{
     color: #1D1F20;
 }
 #banner-container{
-  background-color: white !important;
+  background-color: #F9F3F1 !important;
 }
 .lotties {
     display: grid;
@@ -104,7 +105,7 @@ p {
 
     .btn-xxl {
       padding: 1rem 1rem;
-      font-size: 3rem;
+      font-size: 2rem;
     }
 
 
@@ -113,5 +114,35 @@ p {
     .lotties {
         display: grid;
         grid-template-columns: auto;
+    }
+}
+
+@media print {
+
+/* #myDivToPrint {
+        visibility: visible;
+        background-color: white;
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 15px;
+        font-size: 14px;
+        line-height: 18px;
+    } */
+    #myDivToPrint svg {
+        visibility: visible;
+        background-color: white;
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 15px;
+        font-size: 14px;
+        line-height: 18px;
     }
 }

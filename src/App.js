@@ -24,21 +24,9 @@ class App extends Component {
       <div>
         <Router>
           <Container>
-            <Navbar expand="lg" id="navbar_banner">
-              <Navbar.Brand href="/">
-                <Logo/>
-              </Navbar.Brand>
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="ml-auto">
-                  <a href="/login">Login</a> |<a href="/register">Sign up</a>
-                </Nav>
-              </Navbar.Collapse>
-            </Navbar>
+            
           </Container>
           <Route exact path="/" component={Banner} />
-          <Route path="/about" component={Banner} />
-          <Route path="/contact" component={Banner} />
           <Route path="/session" component={Session} />
           <Route path="/mindmap" component={MindMap} />
           <Route path="/login" component={Login} />

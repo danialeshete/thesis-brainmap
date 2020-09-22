@@ -1,15 +1,11 @@
 import React from "react";
 import Lottie from "react-lottie";
 import animationData from "https://assets1.lottiefiles.com/packages/lf20_xprXnu.json";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Navbar, Nav } from "react-bootstrap";
 import "./Banner.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Register from "./Register";
-import MindMap from "./MindMap";
 import ClickMap from "./ClickMap";
-
 
 export class Banner extends React.Component {
   constructor(props) {
@@ -32,10 +28,20 @@ export class Banner extends React.Component {
   }
 
   render() {
-    
     return (
       <div>
         <Container id="banner-container">
+          <Navbar expand="lg" id="navbar_banner">
+            <Navbar.Brand href="/">
+              <img src={"./logo_light_wname.svg"} />
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="ml-auto">
+                <a href="/login">Login</a> |<a href="/register">Sign up</a>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
           <Row className="justify-content-md-center pt-3 my-auto">
             <h1>The inovative way to brainstorm</h1>
             <h2 className="pt-1 pb-3 my-auto">
@@ -57,7 +63,6 @@ export class Banner extends React.Component {
             </Router>
             <img src={"../assets/working-man.png"} />
           </Row>
-          
         </Container>
       </div>
     );

@@ -1,9 +1,5 @@
 
-#banner-container .row:not(:first-child){
-    background-color: snow;
-    margin-bottom: 0%;
-    
-}
+
 
 
 @media only screen and (min-device-width : 320px) and (max-device-width: 480px) {
