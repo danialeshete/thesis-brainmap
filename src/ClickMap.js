@@ -13,9 +13,9 @@ import {
 import "./ClickMap.css";
 
 const ClickMap = () => {
-  React.useEffect(() => {
-    localStorage.setItem("myValueInLocalStorage", root);
-  }, [root]);
+  useEffect(() => {
+    update();
+  }, []);
 
   function handleKeyPress(e) {
     if (action == "add" && e.key === "Enter") {
@@ -94,10 +94,13 @@ const ClickMap = () => {
         "What are your Ideas to the topic?";
     }
   }
-
   function update() {
     // Update Circles
-    node = node.data(nodes);
+    if (localStorage.getItem("savedNodes") != []) {
+      node = node.data(localStorage.getItem("savedNodes"));
+    } else {
+      node = node.data(nodes);
+    }
     node
       .enter()
       .insert("circle")
@@ -221,9 +224,9 @@ const ClickMap = () => {
     }
   }
   force.on("end", function() {
-    localStorage.setItem("savedNodes",JSON.stringify(nodes));
+    localStorage.setItem("savedNodes", JSON.stringify(nodes));
   });
-  
+
   //id="form" onSubmit={handleSubmit}
   return (
     <Container>
@@ -263,7 +266,6 @@ const ClickMap = () => {
           >
             Export to PDF
           </Button>
-          
         </Col>
       </Row>
       <Row className="menu_input">
