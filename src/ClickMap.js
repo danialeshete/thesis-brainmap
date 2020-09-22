@@ -14,7 +14,8 @@ import "./ClickMap.css";
 
 const ClickMap = () => {
   useEffect(() => {
-    console.log(localStorage.getItem("savedNodes"))
+    savedNodes = localStorage.getItem("savedNodes");
+    savedLinks = localStorage.getItem("savedNodes");
   }, []);
 
   function handleKeyPress(e) {
@@ -41,6 +42,8 @@ const ClickMap = () => {
     height = window.innerHeight,
     currentNode,
     index,
+    savedNodes,
+    savedLinks,
     radius = 20,
     action = "add";
 
@@ -67,8 +70,6 @@ const ClickMap = () => {
     link = svg.selectAll(".link"),
     text = svg.selectAll(".text");
 
-
-
   function add() {
     document.getElementById("topic").focus();
     var topic = document.getElementById("topic").value;
@@ -93,10 +94,11 @@ const ClickMap = () => {
   function update() {
     // Update Circles
     if (localStorage.getItem("savedNodes") != []) {
-      node = node.data(localStorage.getItem("savedNodes"));
+      node = node.data(JSON.parse(savedNodes));
     } else {
       node = node.data(nodes);
     }
+    console.log(nodes);
     node
       .enter()
       .insert("circle")
@@ -106,7 +108,12 @@ const ClickMap = () => {
     node.exit().remove();
 
     // Update Text
-    text = text.data(nodes);
+    if (localStorage.getItem("savedNodes") != []) {
+      text = text.data(JSON.parse(savedNodes));
+    } else {
+      text = text.data(nodes);
+    }
+    //text = text.data(nodes);
     text
       .enter()
       .insert("text")
@@ -117,7 +124,12 @@ const ClickMap = () => {
     text.exit().remove();
 
     // Update Links
-    link = link.data(links);
+    if (localStorage.getItem("savedNodes") != []) {
+      link = link.data(JSON.parse(savedLinks));
+    } else {
+      link = link.data(links);
+    }
+    //link = link.data(links);
     link
       .enter()
       .insert("line", ".node")
@@ -221,6 +233,7 @@ const ClickMap = () => {
   }
   force.on("end", function() {
     localStorage.setItem("savedNodes", JSON.stringify(nodes));
+    localStorage.setItem("savedLinks", JSON.stringify(links));
   });
 
   //id="form" onSubmit={handleSubmit}
