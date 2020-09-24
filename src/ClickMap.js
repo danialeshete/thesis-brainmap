@@ -16,6 +16,7 @@ const ClickMap = () => {
   useEffect(() => {
     savedNodes = localStorage.getItem("savedNodes");
     savedLinks = localStorage.getItem("savedNodes");
+    update();
   }, []);
 
   function handleKeyPress(e) {
@@ -73,6 +74,7 @@ const ClickMap = () => {
   function add() {
     document.getElementById("topic").focus();
     var topic = document.getElementById("topic").value;
+
     if (topic != "") {
       var node = {
         text: topic,
@@ -86,6 +88,7 @@ const ClickMap = () => {
       }
       nodes.push(node);
       update();
+
       document.getElementById("topic").value = "";
       document.getElementById("topic").placeholder =
         "What are your Ideas to the topic?";
@@ -93,7 +96,7 @@ const ClickMap = () => {
   }
   function update() {
     // Update Circles
-    if (localStorage.getItem("savedNodes") != []) {
+    if (savedNodes != []) {
       node = node.data(JSON.parse(savedNodes));
     } else {
       node = node.data(nodes);
@@ -108,7 +111,7 @@ const ClickMap = () => {
     node.exit().remove();
 
     // Update Text
-    if (localStorage.getItem("savedNodes") != []) {
+    if (savedNodes != []) {
       text = text.data(JSON.parse(savedNodes));
     } else {
       text = text.data(nodes);
@@ -124,7 +127,7 @@ const ClickMap = () => {
     text.exit().remove();
 
     // Update Links
-    if (localStorage.getItem("savedNodes") != []) {
+    if (savedLinks != []) {
       link = link.data(JSON.parse(savedLinks));
     } else {
       link = link.data(links);
@@ -190,9 +193,10 @@ const ClickMap = () => {
   function clickNode(d, i) {
     currentNode = d;
     index = i;
-    document.getElementById("topic").placeholder = `"${
-      currentNode.text
-    }" is now active`;
+
+    document.getElementById("topic").placeholder = `${currentNode.text}`;
+    document.getElementById("topic").value = currentNode.text;
+    document.getElementById("topic").focus();
   }
 
   function changeBG() {
