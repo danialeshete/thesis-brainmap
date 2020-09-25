@@ -15,7 +15,7 @@ import "./ClickMap.css";
 const ClickMap = () => {
   useEffect(() => {
     savedNodes = localStorage.getItem("savedNodes");
-    savedLinks = localStorage.getItem("savedNodes");
+    savedLinks = localStorage.getItem("savedLinks");
     update();
   }, []);
 
