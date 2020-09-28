@@ -1,43 +1,42 @@
 import React, { useState, useEffect } from "react";
 import * as d3 from "d3";
-import {
-  FormControl,
-  Button,
-  Container,
-  Col,
-  Row,
-  Modal,
-  Form
-} from "react-bootstrap";
+import { FormControl, Button, Container, Col, Row } from "react-bootstrap";
 
 import "./ClickMap.css";
 
 const ClickMap = () => {
+  //Startet einmal am Anfang weil "[]"
   useEffect(() => {
-    savedNodes = JSON.parse(localStorage.getItem("savedNodes"));
-    savedLinks = JSON.parse(localStorage.getItem("savedLinks"));
-    if (savedNodes != []) {
-      update();
-    }
+    savedNodes = localStorage.getItem("savedNodes");
+    savedLinks = localStorage.getItem("savedLinks");
+    update();
   }, []);
 
   function handleKeyPress(e) {
     if (action == "add" && e.key === "Enter") {
-      console.log(action);
+      d3.select("#addBtn").attr("border-color", "black");
       add();
     } else if (action == "edit" && e.key === "Enter") {
-      console.log(action);
+      //d3.select("#editBtn").attr("border-color", "black");
       edit();
+    } else if (action == "another" && e.key === "Enter") {
     }
   }
 
   function changeActionToAdd() {
     action = "add";
+    document.getElementById("topic").value = "";
     document.getElementById("topic").focus();
   }
 
   function changeActionToEdit() {
+    document.getElementById("topic").value = "";
+    document.getElementById("topic").value = currentNode.text;
     action = "edit";
+    document.getElementById("topic").focus();
+  }
+  function changeActionToAnother() {
+    action = "another";
     document.getElementById("topic").focus();
   }
 
@@ -95,16 +94,17 @@ const ClickMap = () => {
       document.getElementById("topic").placeholder =
         "What are your Ideas to the topic?";
     }
+    saveToLocal();
   }
   function update() {
     // Update Circles
-    /* if (savedNodes != []) {
-      node = node.data(savedNodes);
+    if (savedNodes != []) {
+      node = node.data(JSON.parse(savedNodes));
     } else {
       node = node.data(nodes);
-    } */
+    }
     //node = node.data(savedNodes);
-    node = node.data(nodes);
+    //node = node.data(nodes);
     node
       .enter()
       .insert("circle")
@@ -114,13 +114,13 @@ const ClickMap = () => {
     node.exit().remove();
 
     // Update Text
-    /* if (savedNodes != []) {
-      text = text.data(savedNodes);
+    if (savedNodes != []) {
+      text = text.data(JSON.parse(savedNodes));
     } else {
       text = text.data(nodes);
-    } */
+    }
     //text = text.data(savedNodes);
-    text = text.data(nodes);
+    //text = text.data(nodes);
     text
       .enter()
       .insert("text")
@@ -131,13 +131,13 @@ const ClickMap = () => {
     text.exit().remove();
 
     // Update Links
-    /* if (savedLinks != []) {
+    if (savedLinks != []) {
       link = link.data(JSON.parse(savedLinks));
     } else {
       link = link.data(links);
-    } */
+    }
     //link = link.data(savedLinks);
-    link = link.data(links);
+    //link = link.data(links);
     link
       .enter()
       .insert("line", ".node")
@@ -149,7 +149,6 @@ const ClickMap = () => {
   function tick() {
     link
       .attr("x1", function(d) {
-        
         return d.source.x;
       })
       .attr("y1", function(d) {
@@ -186,7 +185,6 @@ const ClickMap = () => {
         return n.text;
       })
       .attr("x", function(d) {
-        
         return d.x;
       })
       .attr("y", function(d) {
@@ -201,9 +199,14 @@ const ClickMap = () => {
   function clickNode(d, i) {
     currentNode = d;
     index = i;
-
-    document.getElementById("topic").placeholder = `${currentNode.text}`;
-    document.getElementById("topic").value = currentNode.text;
+    if (action == "add") {
+      document.getElementById("topic").value = "";
+      document.getElementById("topic").placeholder = `Add new ideas to "${
+        currentNode.text
+      }"`;
+    } else if (action == "edit") {
+      document.getElementById("topic").value = currentNode.text;
+    }
     document.getElementById("topic").focus();
   }
 
@@ -238,15 +241,10 @@ const ClickMap = () => {
       update();
       document.getElementById("topic").value = "";
       currentNode = nodes[index];
-      document.getElementById("topic").placeholder = `"${
-        currentNode.text
-      }" is now active`;
     }
   }
-  force.on("end", function() {
-    saveToLocal();
-  });
-  function saveToLocal(){
+ 
+  function saveToLocal() {
     localStorage.setItem("savedNodes", JSON.stringify(nodes));
     localStorage.setItem("savedLinks", JSON.stringify(links));
   }
@@ -264,6 +262,15 @@ const ClickMap = () => {
             variant="primary"
           >
             Add
+          </Button>
+          <Button
+            className="m-2"
+            id="addAnotherBtn"
+            onClick={changeActionToAnother}
+            type="submit"
+            variant="success"
+          >
+            Another Node
           </Button>
           <Button
             className="m-2"
