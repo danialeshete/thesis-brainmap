@@ -103,12 +103,16 @@ const ClickMap = () => {
     }
   }
   function update() {
-    if (savedNodes.length !== 0) {
-      nodes = JSON.parse(savedNodes);
-      console.log(nodes);
+    if (savedNodes != null) {
+      if (savedNodes.length !== 0) {
+        nodes = JSON.parse(savedNodes);
+        console.log(nodes);
+      }
     }
-    if (savedLinks.length !== 0) {
-      links = JSON.parse(savedLinks);
+    if (savedLinks != null) {
+      if (savedLinks.length !== 0) {
+        links = JSON.parse(savedLinks);
+      }
     }
 
     // Update Circles
