@@ -14,9 +14,11 @@ import "./ClickMap.css";
 
 const ClickMap = () => {
   useEffect(() => {
-    savedNodes = localStorage.getItem("savedNodes");
-    savedLinks = localStorage.getItem("savedLinks");
-    update();
+    savedNodes = JSON.parse(localStorage.getItem("savedNodes"));
+    savedLinks = JSON.parse(localStorage.getItem("savedLinks"));
+    if (savedNodes != []) {
+      update();
+    }
   }, []);
 
   function handleKeyPress(e) {
@@ -96,12 +98,13 @@ const ClickMap = () => {
   }
   function update() {
     // Update Circles
-    if (savedNodes != []) {
-      node = node.data(JSON.parse(savedNodes));
+    /* if (savedNodes != []) {
+      node = node.data(savedNodes);
     } else {
       node = node.data(nodes);
-    }
-    console.log(nodes);
+    } */
+    //node = node.data(savedNodes);
+    node = node.data(nodes);
     node
       .enter()
       .insert("circle")
@@ -111,12 +114,13 @@ const ClickMap = () => {
     node.exit().remove();
 
     // Update Text
-    if (savedNodes != []) {
-      text = text.data(JSON.parse(savedNodes));
+    /* if (savedNodes != []) {
+      text = text.data(savedNodes);
     } else {
       text = text.data(nodes);
-    }
-    //text = text.data(nodes);
+    } */
+    //text = text.data(savedNodes);
+    text = text.data(nodes);
     text
       .enter()
       .insert("text")
@@ -127,12 +131,13 @@ const ClickMap = () => {
     text.exit().remove();
 
     // Update Links
-    if (savedLinks != []) {
+    /* if (savedLinks != []) {
       link = link.data(JSON.parse(savedLinks));
     } else {
       link = link.data(links);
-    }
-    //link = link.data(links);
+    } */
+    //link = link.data(savedLinks);
+    link = link.data(links);
     link
       .enter()
       .insert("line", ".node")
@@ -144,6 +149,7 @@ const ClickMap = () => {
   function tick() {
     link
       .attr("x1", function(d) {
+        
         return d.source.x;
       })
       .attr("y1", function(d) {
@@ -159,6 +165,7 @@ const ClickMap = () => {
     node
       .style("fill", d => d.colorID)
       .attr("cx", function(d) {
+        
         return (d.x = Math.max(
           radius,
           Math.min(width - d.text.length * 5, d.x)
@@ -179,6 +186,7 @@ const ClickMap = () => {
         return n.text;
       })
       .attr("x", function(d) {
+        
         return d.x;
       })
       .attr("y", function(d) {
@@ -236,9 +244,12 @@ const ClickMap = () => {
     }
   }
   force.on("end", function() {
+    saveToLocal();
+  });
+  function saveToLocal(){
     localStorage.setItem("savedNodes", JSON.stringify(nodes));
     localStorage.setItem("savedLinks", JSON.stringify(links));
-  });
+  }
 
   //id="form" onSubmit={handleSubmit}
   return (

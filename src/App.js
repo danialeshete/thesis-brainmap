@@ -1,22 +1,18 @@
 import React, { Component } from "react";
-import { ReactComponent as Logo } from './logo_light_wname.svg';
 import MindMap from "./MindMap";
-import NavBar from "./NavBar";
 import Login from "./Login";
 import Register from "./Register";
 import Session from "./Session";
 import Draggable from "./Draggable";
 import Banner from "./Banner";
-import Lottie from "react-lottie";
 import ClickMap from "./ClickMap";
 import ForceV3 from "./ForceV3";
 import ForceV5 from "./ForceV3";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
-import { Container, Navbar, Nav, Button } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./NavBar.css";
-import * as d3 from "d3";
 
 class App extends Component {
   render() {
