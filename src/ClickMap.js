@@ -11,10 +11,10 @@ const ClickMap = () => {
     savedLinks = localStorage.getItem("savedLinks");
     if (savedNodes != null) {
       if (savedNodes.length !== 0) {
-        console.log("ist leer");
+        console.log("ist nicht leer");
         update();
       } else {
-        console.log("ist null");
+        console.log("ist leer");
       }
     }
   }, []);
@@ -95,6 +95,7 @@ const ClickMap = () => {
         currentNode = node;
       }
       nodes.push(node);
+      saveEachNode();
       update();
 
       document.getElementById("topic").value = "";
@@ -246,14 +247,18 @@ const ClickMap = () => {
   }
   force.on("end", function() {
     //speicher localStorage wenn die bobbles stillstehen
-    saveToLocal();
+    saveToLocalStorage();
     console.log("test");
   });
 
   //speicher nodes in LocalStorage als savedNodes
-  function saveToLocal() {
+  function saveToLocalStorage() {
     localStorage.setItem("savedNodes", JSON.stringify(nodes));
     localStorage.setItem("savedLinks", JSON.stringify(links));
+  }
+  function saveEachNode(){
+    localStorage.setItem("savedNodes", JSON.stringify(node));
+    localStorage.setItem("savedLinks", JSON.stringify(link));
   }
 
   //id="form" onSubmit={handleSubmit}
