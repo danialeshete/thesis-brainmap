@@ -9,7 +9,14 @@ const ClickMap = () => {
   useEffect(() => {
     savedNodes = localStorage.getItem("savedNodes");
     savedLinks = localStorage.getItem("savedLinks");
-    update();
+    if (savedNodes != null) {
+      if (savedNodes.length !== 0) {
+        console.log("ist leer");
+        update();
+      } else {
+        console.log("ist null");
+      }
+    }
   }, []);
 
   function handleKeyPress(e) {
@@ -94,17 +101,19 @@ const ClickMap = () => {
       document.getElementById("topic").placeholder =
         "What are your Ideas to the topic?";
     }
-    saveToLocal();
   }
   function update() {
-    // Update Circles
-    if (savedNodes != []) {
-      node = node.data(JSON.parse(savedNodes));
-    } else {
-      node = node.data(nodes);
+    if (savedNodes.length !== 0) {
+      nodes = JSON.parse(savedNodes);
+      console.log(nodes);
     }
-    //node = node.data(savedNodes);
-    //node = node.data(nodes);
+    if (savedLinks.length !== 0) {
+      links = JSON.parse(savedLinks);
+    }
+
+    // Update Circles
+
+    node = node.data(nodes);
     node
       .enter()
       .insert("circle")
@@ -114,13 +123,7 @@ const ClickMap = () => {
     node.exit().remove();
 
     // Update Text
-    if (savedNodes != []) {
-      text = text.data(JSON.parse(savedNodes));
-    } else {
-      text = text.data(nodes);
-    }
-    //text = text.data(savedNodes);
-    //text = text.data(nodes);
+    text = text.data(nodes);
     text
       .enter()
       .insert("text")
@@ -131,13 +134,7 @@ const ClickMap = () => {
     text.exit().remove();
 
     // Update Links
-    if (savedLinks != []) {
-      link = link.data(JSON.parse(savedLinks));
-    } else {
-      link = link.data(links);
-    }
-    //link = link.data(savedLinks);
-    //link = link.data(links);
+    link = link.data(links);
     link
       .enter()
       .insert("line", ".node")
@@ -164,17 +161,17 @@ const ClickMap = () => {
     node
       .style("fill", d => d.colorID)
       .attr("cx", function(d) {
-        
         return (d.x = Math.max(
           radius,
           Math.min(width - d.text.length * 5, d.x)
         ));
       })
       .attr("cy", function(d) {
-        return (d.y = Math.max(
+        /* return (d.y = Math.max(
           radius,
           Math.min(height - d.text.length * 5, d.y)
-        ));
+        )); */
+        return d.y - d.text.length;
       })
       .attr("r", function(d) {
         return d.text.length * 5;
@@ -243,7 +240,13 @@ const ClickMap = () => {
       currentNode = nodes[index];
     }
   }
- 
+  force.on("end", function() {
+    //speicher localStorage wenn die bobbles stillstehen
+    saveToLocal();
+    console.log("test");
+  });
+
+  //speicher nodes in LocalStorage als savedNodes
   function saveToLocal() {
     localStorage.setItem("savedNodes", JSON.stringify(nodes));
     localStorage.setItem("savedLinks", JSON.stringify(links));
