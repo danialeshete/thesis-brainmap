@@ -29,8 +29,8 @@ const ClickMap = () => {
     .attr("width", width)
     .attr("height", height);
 
-  var nodes = force.nodes(),
-    links = force.links(),
+  var nodes = force.nodes(JSON.parse(localStorage.getItem("savedNodes"))),
+    links = force.links(JSON.parse(localStorage.getItem("savedLinks"))),
     node = svg.selectAll(".node"),
     link = svg.selectAll(".link"),
     text = svg.selectAll(".text");
@@ -43,7 +43,7 @@ const ClickMap = () => {
     if (nodes != null) {
       if (nodes.length !== 0) {
         console.log("ist nicht leer");
-        nodes.force.nodes();
+        
         update();
       } else {
         console.log("ist leer");
