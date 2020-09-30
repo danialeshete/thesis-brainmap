@@ -37,8 +37,8 @@ const ClickMap = () => {
 
   //Startet einmal am Anfang weil "[]"
   useEffect(() => {
-    nodes = JSON.parse(localStorage.getItem("savedNodes"));
-    links = JSON.parse(localStorage.getItem("savedLinks"));
+   /*  nodes = JSON.parse(localStorage.getItem("savedNodes"));
+    links = JSON.parse(localStorage.getItem("savedLinks")); */
 
     if (nodes != null) {
       if (nodes.length !== 0) {
