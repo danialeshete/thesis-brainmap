@@ -7,7 +7,7 @@ import "./ClickMap.css";
 const ClickMap = () => {
   //Startet einmal am Anfang weil "[]"
   useEffect(() => {
-    savedNodes = localStorage.getItem("savedNodes");
+    /* savedNodes = localStorage.getItem("savedNodes");
     savedLinks = localStorage.getItem("savedLinks");
     if (savedNodes != null) {
       if (savedNodes.length !== 0) {
@@ -16,7 +16,10 @@ const ClickMap = () => {
       } else {
         console.log("ist leer");
       }
-    }
+    } */
+    /* nodeSaved = localStorage.getItem("nodeSaved");
+    linkSaved = localStorage.getItem("linkSaved"); */
+    
   }, []);
 
   function handleKeyPress(e) {
@@ -257,8 +260,8 @@ const ClickMap = () => {
     localStorage.setItem("savedLinks", JSON.stringify(links));
   }
   function saveEachNode(){
-    localStorage.setItem("savedNodes", JSON.stringify(node));
-    localStorage.setItem("savedLinks", JSON.stringify(link));
+    localStorage.setItem("nodeSaved", JSON.stringify(node));
+    localStorage.setItem("linkSaved", JSON.stringify(link));
   }
 
   //id="form" onSubmit={handleSubmit}
