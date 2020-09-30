@@ -5,21 +5,56 @@ import { FormControl, Button, Container, Col, Row } from "react-bootstrap";
 import "./ClickMap.css";
 
 const ClickMap = () => {
+  var width = window.innerWidth,
+    height = window.innerHeight,
+    currentNode,
+    index,
+    radius = 20,
+    action = "add";
+
+  var force = d3.layout
+    .force()
+    .distance(100)
+    .gravity(0.05)
+    .size([width, height])
+    .on("tick", tick)
+    .charge(-600);
+
+  var svg = d3
+    .select("body")
+    .append("div")
+    .attr("id", "myDivToPrint")
+    .attr("class", "container")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+  var nodes = force.nodes(),
+    links = force.links(),
+    node = svg.selectAll(".node"),
+    link = svg.selectAll(".link"),
+    text = svg.selectAll(".text");
+
   //Startet einmal am Anfang weil "[]"
   useEffect(() => {
-    /* savedNodes = localStorage.getItem("savedNodes");
-    savedLinks = localStorage.getItem("savedLinks");
-    if (savedNodes != null) {
-      if (savedNodes.length !== 0) {
+    nodes = JSON.parse(localStorage.getItem("savedNodes"));
+    links = JSON.parse(localStorage.getItem("savedLinks"));
+
+    if (nodes != null) {
+      if (nodes.length !== 0) {
         console.log("ist nicht leer");
+        nodes.force.nodes();
         update();
       } else {
         console.log("ist leer");
       }
-    } */
+    } else {
+      nodes = force.nodes();
+      links = force.links();
+      console.log("ist leer");
+    }
     /* nodeSaved = localStorage.getItem("nodeSaved");
     linkSaved = localStorage.getItem("linkSaved"); */
-    
   }, []);
 
   function handleKeyPress(e) {
@@ -50,38 +85,6 @@ const ClickMap = () => {
     document.getElementById("topic").focus();
   }
 
-  var width = window.innerWidth,
-    height = window.innerHeight,
-    currentNode,
-    index,
-    savedNodes,
-    savedLinks,
-    radius = 20,
-    action = "add";
-
-  var force = d3.layout
-    .force()
-    .distance(100)
-    .gravity(0.05)
-    .size([width, height])
-    .on("tick", tick)
-    .charge(-600);
-
-  var svg = d3
-    .select("body")
-    .append("div")
-    .attr("id", "myDivToPrint")
-    .attr("class", "container")
-    .append("svg")
-    .attr("width", width)
-    .attr("height", height);
-
-  var nodes = force.nodes(),
-    links = force.links(),
-    node = svg.selectAll(".node"),
-    link = svg.selectAll(".link"),
-    text = svg.selectAll(".text");
-
   function add() {
     document.getElementById("topic").focus();
     var topic = document.getElementById("topic").value;
@@ -98,8 +101,10 @@ const ClickMap = () => {
         currentNode = node;
       }
       nodes.push(node);
-      saveEachNode();
+
       update();
+
+      saveToLocalStorage();
 
       document.getElementById("topic").value = "";
       document.getElementById("topic").placeholder =
@@ -107,48 +112,41 @@ const ClickMap = () => {
     }
   }
   function update() {
-    if (savedNodes != null) {
-      if (savedNodes.length !== 0) {
-        nodes = JSON.parse(savedNodes);
+    if (nodes != null) {
+      if (nodes.length !== 0) {
+        // Update Circles
+        node = node.data(nodes);
+        node
+          .enter()
+          .insert("circle")
+          .attr("class", "node")
+          .on("click", clickNode)
+          .call(force.drag);
+        node.exit().remove();
+
+        // Update Text
+        text = text.data(nodes);
+        text
+          .enter()
+          .insert("text")
+          .attr("class", "text")
+          .attr("text-anchor", "middle")
+          .on("click", clickNode)
+          .call(force.drag);
+        text.exit().remove();
+
+        // Update Links
+        link = link.data(links);
+        link
+          .enter()
+          .insert("line", ".node")
+          .attr("class", "link");
+        link.exit().remove();
+        force.start();
         console.log(nodes);
+        console.log(links);
       }
     }
-    if (savedLinks != null) {
-      if (savedLinks.length !== 0) {
-        links = JSON.parse(savedLinks);
-      }
-    }
-
-    // Update Circles
-
-    node = node.data(nodes);
-    node
-      .enter()
-      .insert("circle")
-      .attr("class", "node")
-      .on("click", clickNode)
-      .call(force.drag);
-    node.exit().remove();
-
-    // Update Text
-    text = text.data(nodes);
-    text
-      .enter()
-      .insert("text")
-      .attr("class", "text")
-      .attr("text-anchor", "middle")
-      .on("click", clickNode)
-      .call(force.drag);
-    text.exit().remove();
-
-    // Update Links
-    link = link.data(links);
-    link
-      .enter()
-      .insert("line", ".node")
-      .attr("class", "link");
-    link.exit().remove();
-    force.start();
   }
 
   function tick() {
@@ -175,11 +173,11 @@ const ClickMap = () => {
         ));
       })
       .attr("cy", function(d) {
-        /* return (d.y = Math.max(
+        return (d.y = Math.max(
           radius,
           Math.min(height - d.text.length * 5, d.y)
-        )); */
-        return d.y - d.text.length;
+        ));
+        //return d.y - d.text.length;
       })
       .attr("r", function(d) {
         return d.text.length * 5;
@@ -250,8 +248,6 @@ const ClickMap = () => {
   }
   force.on("end", function() {
     //speicher localStorage wenn die bobbles stillstehen
-    saveToLocalStorage();
-    console.log("test");
   });
 
   //speicher nodes in LocalStorage als savedNodes
@@ -259,7 +255,7 @@ const ClickMap = () => {
     localStorage.setItem("savedNodes", JSON.stringify(nodes));
     localStorage.setItem("savedLinks", JSON.stringify(links));
   }
-  function saveEachNode(){
+  function saveEachNode() {
     localStorage.setItem("nodeSaved", JSON.stringify(node));
     localStorage.setItem("linkSaved", JSON.stringify(link));
   }
