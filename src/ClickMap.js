@@ -28,9 +28,14 @@ const ClickMap = () => {
     .append("svg")
     .attr("width", width)
     .attr("height", height);
-
-  var nodes = force.nodes(JSON.parse(localStorage.getItem("savedNodes"))),
+    
+    /* if (nodes != null) {
+       var nodes = force.nodes(JSON.parse(localStorage.getItem("savedNodes"))),
     links = force.links(JSON.parse(localStorage.getItem("savedLinks"))),
+    } else{
+      var nodes = force.nodes(), links = force.links();
+    } */
+    
     node = svg.selectAll(".node"),
     link = svg.selectAll(".link"),
     text = svg.selectAll(".text");
