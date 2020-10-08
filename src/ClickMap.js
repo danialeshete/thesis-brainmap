@@ -29,14 +29,14 @@ const ClickMap = () => {
     .attr("width", width)
     .attr("height", height);
     
-    /* if (nodes != null) {
+     if (nodes != null) {
        var nodes = force.nodes(JSON.parse(localStorage.getItem("savedNodes"))),
     links = force.links(JSON.parse(localStorage.getItem("savedLinks"))),
     } else{
       var nodes = force.nodes(), links = force.links();
-    } */
+    } 
     
-    node = svg.selectAll(".node"),
+    var node = svg.selectAll(".node"),
     link = svg.selectAll(".link"),
     text = svg.selectAll(".text");
 
@@ -185,7 +185,11 @@ const ClickMap = () => {
         //return d.y - d.text.length;
       })
       .attr("r", function(d) {
+        if(d.text.length < 5){
+          return 25;
+        } else {
         return d.text.length * 5;
+        }
       });
 
     text
@@ -279,15 +283,7 @@ const ClickMap = () => {
           >
             Add
           </Button>
-          <Button
-            className="m-2"
-            id="addAnotherBtn"
-            onClick={changeActionToAnother}
-            type="submit"
-            variant="success"
-          >
-            Another Node
-          </Button>
+          
           <Button
             className="m-2"
             onClick={changeActionToEdit}
