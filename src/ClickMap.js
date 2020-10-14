@@ -133,6 +133,9 @@ const ClickMap = () => {
         text = text.data(nodes);
         text
           .enter()
+          .insert("rect")
+          .attr("class","rect")
+          .attr("fill","red")
           .insert("text")
           .attr("class", "text")
           .attr("text-anchor", "middle")

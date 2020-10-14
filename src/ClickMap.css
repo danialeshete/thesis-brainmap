@@ -38,7 +38,9 @@
 .node {
   display: none;
 }
-.test {
+.text {
+  border-radius: 40px;
+  background: #73ad21;
 }
 
 @media only screen and (max-width: 834px) {
