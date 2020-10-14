@@ -6,7 +6,7 @@ import "./ClickMap.css";
 
 const ClickMap = () => {
   var width = window.innerWidth,
-    height = window.innerHeight,
+    height = window.innerHeight-121,
     currentNode,
     index,
     radius = 20,
