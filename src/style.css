@@ -132,6 +132,7 @@ p {
         font-size: 14px;
         line-height: 18px;
     } */
+    
     #myDivToPrint svg {
         visibility: visible;
         background-color: white;
@@ -140,9 +141,12 @@ p {
         position: fixed;
         top: 0;
         left: 0;
-        margin: 0;
+        margin: 0 auto;
+        text-align: center; 
         padding: 15px;
         font-size: 14px;
         line-height: 18px;
+        clear: both;
+        display: block;
     }
 }

@@ -4,8 +4,6 @@
 
 .link {
   fill: none;
-  stroke: #9ecae1;
-  stroke-width: 2px;
 }
 #topic {
   width: 100%;
@@ -34,9 +32,6 @@
 .btn-info {
   background-color: #1d1f20 !important;
   border-color: #1d1f20 !important;
-}
-.node {
-  display: none;
 }
 .text {
   border-radius: 40px;
