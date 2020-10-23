@@ -1,6 +1,5 @@
 import React from "react";
 import Lottie from "react-lottie";
-import animationData from "https://assets1.lottiefiles.com/packages/lf20_xprXnu.json";
 import { Container, Row, Col, Button, Navbar, Nav } from "react-bootstrap";
 import "./Banner.css";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
@@ -33,7 +32,7 @@ export class Banner extends React.Component {
         <Container id="banner-container">
           <Navbar expand="lg" id="navbar_banner">
             <Navbar.Brand href="/">
-              <img src={"./logo_light_wname.svg"} />
+              BrainMap
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
@@ -61,7 +60,6 @@ export class Banner extends React.Component {
               <Route path="/clickmap" component={ClickMap} />
               <Route path="/register" component={Register} />
             </Router>
-            <img src={"../assets/working-man.png"} />
           </Row>
         </Container>
       </div>

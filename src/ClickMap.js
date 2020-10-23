@@ -29,9 +29,9 @@ const ClickMap = () => {
     .attr("width", width)
     .attr("height", height);
     
-     if (nodes != null) {
+    if (nodes != null) {
        var nodes = force.nodes(JSON.parse(localStorage.getItem("savedNodes"))),
-    links = force.links(JSON.parse(localStorage.getItem("savedLinks"))),
+    links = force.links(JSON.parse(localStorage.getItem("savedLinks")));
     } else{
       var nodes = force.nodes(), links = force.links();
     } 
@@ -274,6 +274,7 @@ const ClickMap = () => {
     <Container>
       <Row className="pt-3 menu">
         <Col>
+        BrainMap
           <Button
             className="m-2"
             id="addBtn"
