@@ -5,6 +5,8 @@ import "./Banner.css";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Register from "./Register";
 import ClickMap from "./ClickMap";
+import { ReactComponent as Logo } from './logo_dark.svg';
+
 
 export class Banner extends React.Component {
   constructor(props) {
@@ -32,7 +34,7 @@ export class Banner extends React.Component {
         <Container id="banner-container">
           <Navbar expand="lg" id="navbar_banner">
             <Navbar.Brand href="/">
-              BrainMap
+              <Logo id="bannerLogo" />
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
@@ -41,7 +43,7 @@ export class Banner extends React.Component {
               </Nav>
             </Navbar.Collapse>
           </Navbar>
-          <Row className="justify-content-md-center pt-3 my-auto">
+          <Row className="justify-content-md pt-3 my-auto">
             <h1>The inovative way to brainstorm</h1>
             <h2 className="pt-1 pb-3 my-auto">
               BrainMap is a creative tool to enhance your ideation process
@@ -57,6 +59,7 @@ export class Banner extends React.Component {
                 aliquam viverra eget eget amet. Ac nisl mauris faucibus iaculis
                 molestie viverra.
               </h3>
+
               <Route path="/clickmap" component={ClickMap} />
               <Route path="/register" component={Register} />
             </Router>

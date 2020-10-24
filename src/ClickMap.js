@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as d3 from "d3";
 import { FormControl, Button, Container, Col, Row } from "react-bootstrap";
-
+import { ReactComponent as Logo } from './logo_dark.svg';
 import "./ClickMap.css";
 
 const ClickMap = () => {
@@ -274,7 +274,7 @@ const ClickMap = () => {
     <Container>
       <Row className="pt-3 menu">
         <Col>
-        BrainMap
+        <Logo id="logo"/>
           <Button
             className="m-2"
             id="addBtn"
@@ -282,7 +282,7 @@ const ClickMap = () => {
             type="submit"
             variant="primary"
           >
-          <i class="fas fa-plus-circle"></i>
+          <i className="fas fa-plus-circle"></i>
             Add
           </Button>
           

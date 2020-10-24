@@ -1,10 +1,15 @@
+#bannerLogo{
+    width: 30%
+  }
 
 
 
-
-@media only screen and (min-device-width : 320px) and (max-device-width: 480px) {
+@media only screen and (min-device-width : 320px) and (max-device-width: 834px) {
     .lotties {
         display: grid;
         grid-template-columns: auto;
+    }
+    #logo{
+        width:15%
     }
 } 

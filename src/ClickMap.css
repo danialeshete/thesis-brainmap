@@ -1,10 +1,26 @@
-.node {
-  cursor: pointer;
+.link {
+  fill: none;
+  stroke: #9ecae1;
+  stroke-width: 1.5px;
+ }
+ rect {
+  fill: none;
+  pointer-events: all;
+}
+
+
+.cursor {
+  fill: none;
+  stroke: brown;
+  pointer-events: none;
 }
 
 .link {
+  stroke: #999;
   fill: none;
 }
+
+
 #topic {
   width: 100%;
 }
@@ -33,13 +49,15 @@
   background-color: #1d1f20 !important;
   border-color: #1d1f20 !important;
 }
-.text {
-  border-radius: 40px;
-  background: #73ad21;
+#logo{
+  width: 7%
 }
 
 @media only screen and (max-width: 834px) {
   .menu_input {
     width: 100%;
+  }
+  #logo{
+    width: 15%
   }
 }

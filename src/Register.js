@@ -39,10 +39,10 @@ export class Register extends React.Component {
 
                 <Form.Group controlId="formPassword">
                   <Form.Label>Password</Form.Label>
-                  <Form.Control type="password" placeholder="Password" />
+                  <Form.Control type="password" placeholder="Password" required/>
                 </Form.Group>
                 <Form.Group controlId="formCheckbox">
-                  <Form.Check type="checkbox" label="Accept AGB" />
+                  <Form.Check type="checkbox" label="Accept AGB" required/>
                 </Form.Group>
                 <Router>
                   <Button variant="primary" type="submit" href="/clickmap">
