@@ -2,13 +2,36 @@
     width: 30%
   }
 
+.lottie{
+    z-index: 2;
+    position: absolute;
+    top: 0%;
+    right: 0%;
+}
+.landing_text{
+    z-index: 3;
+}
+h1.landing_text {
+    font-size: 52px;
 
+}
 
-@media only screen and (min-device-width : 320px) and (max-device-width: 834px) {
-    .lotties {
-        display: grid;
-        grid-template-columns: auto;
+@media only screen and (max-width: 834px) {
+    .lottie{
+        
+        z-index: 2;
+        position: absolute;
+        bottom: 0%
     }
+
+    h1.landing_text {
+        font-size: 40px;
+    
+    }
+    h2.landing_text {
+        font-size: 25px;
+    }
+    
     #logo{
         width:15%
     }

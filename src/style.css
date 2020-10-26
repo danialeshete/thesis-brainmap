@@ -1,6 +1,8 @@
-h1, p {
-  font-family: Lato;
+h1,
+p {
+    font-family: Lato;
 }
+
 h1 {
     font-family: 'Roboto Bold', sans-serif;
     font-weight: 900;
@@ -60,8 +62,9 @@ h1.span {
 body {
     background-color: #F9F3F1;
 }
-#navbar_banner{
-  background-color: #F9F3F1 !important ;
+
+#navbar_banner {
+    background-color: #F9F3F1 !important;
 }
 
 b {
@@ -81,45 +84,55 @@ p {
     background-color: #5DB5AB !important;
     border-color: #5DB5AB !important;
 }
-.btn-link{
+
+.btn-link {
     color: #1D1F20;
 }
-#banner-container{
-  background-color: #F9F3F1 !important;
+
+#banner-container {
+    background-color: #F9F3F1 !important;
 }
+
 .lotties {
     display: grid;
     grid-template-columns: auto auto;
 }
+
 .click-circle {
     fill: skyblue;
 }
-.navbar{
-  background-color: #F9F3F1 !important;
+
+.navbar {
+    background-color: #F9F3F1 !important;
 }
 
 .btn-brainmap {
-   background-color: #5DB5AB;
-  color: #F9F3F1;
- }
+    background-color: #5DB5AB;
+    color: #F9F3F1;
+}
 
- .btn-xxl {
-  padding: 1rem 1rem;
-  font-size: 2rem;
- }
+.btn-xxl {
+    padding: 1rem 1rem;
+    font-size: 2rem;
+}
 
 
 
-@media only screen and (min-device-width : 320px) and (max-device-width: 480px) {
+@media only screen and (max-width: 834px) {
     .lotties {
         display: grid;
         grid-template-columns: auto;
+    }
+
+    .btn-xxl {
+        padding: 1rem 1rem;
+        font-size: 1rem;
     }
 }
 
 @media print {
 
-/* #myDivToPrint {
+    /* #myDivToPrint {
         visibility: visible;
         background-color: white;
         height: 100%;
@@ -132,7 +145,7 @@ p {
         font-size: 14px;
         line-height: 18px;
     } */
-    
+
     #myDivToPrint svg {
         visibility: visible;
         background-color: white;
@@ -142,7 +155,7 @@ p {
         top: 0;
         left: 0;
         margin: 0 auto;
-        text-align: center; 
+        text-align: center;
         padding: 15px;
         font-size: 14px;
         line-height: 18px;
