@@ -41,14 +41,32 @@
   background-color: #5db5ab !important;
   border-color: #5db5ab !important;
 }
-.btn-secondary {
-  background-color: #c28c7e !important;
-  border-color: #c28c7e !important;
-  color: #080808 !important;
+#editBtn{
+  background-color: #d39e00;
+  border-color: #d39e00;
+  color: #080808;
 }
+#delBtn{
+  background-color: #da7d5e;
+  border-color: #da7d5e;
+  color: #080808;
+}
+#expBtn{
+  background-color: #1d1f20 !important;
+  background-color: #1d1f20 !important;
+  color: white;
+}
+#expBtn:hover, #expBtn:focus{
+  color: rgb(216, 215, 215);
+}
+#editBtn:hover, #delBtn:hover, #editBtn:focus, #delBtn:focus{
+  color: white !important;
+}
+
 .btn-info {
   background-color: #1d1f20 !important;
   border-color: #1d1f20 !important;
+  color: #1c1c1c;
 }
 #logo{
   width: 7%
@@ -66,6 +84,9 @@
   
 }
 
+.btn-primary:focus{
+  background-color: yellow;
+}
 @media only screen and (max-width: 834px) {
   .menu_input {
     width: 100%;
@@ -84,5 +105,12 @@
   #formLabel{
     margin-left: 2%;
     font-size: 13px;
+  }
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"] {
+    font-size: 16px;
   }
 }

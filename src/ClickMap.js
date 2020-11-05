@@ -87,21 +87,21 @@ const ClickMap = () => {
   }
 
   function changeActionToAdd() {
+    document.getElementById("addBtn").focus();
+    document.getElementById("topicLabel").innerHTML=`Add has been selcted. Enter or "Go" to add an Idea `;
     action = "add";
     document.getElementById("topic").value = "";
     document.getElementById("topic").focus();
   }
 
   function changeActionToEdit() {
+    document.getElementById("topicLabel").innerHTML=`Edit has been selcted. Click on the Node to change it. `;
+    document.getElementById("editBtn").focus();
     document.getElementById("topic").value = "";
     if (currentNode != undefined && nodes != undefined && document.getElementById("topic").value != "") {
       document.getElementById("topic").value = currentNode.text;
     }
     action = "edit";
-    document.getElementById("topic").focus();
-  }
-  function changeActionToAnother() {
-    action = "another";
     document.getElementById("topic").focus();
   }
 
@@ -309,6 +309,7 @@ const ClickMap = () => {
             onClick={changeActionToAdd}
             type="submit"
             variant="primary"
+            
 
           >
             <FontAwesomeIcon icon={faPlusCircle} />
@@ -319,6 +320,7 @@ const ClickMap = () => {
             className="m-2 btn-br"
             onClick={changeActionToEdit}
             id="editBtn"
+            type="submit"
             variant="secondary"
           >
             <FontAwesomeIcon icon={faEdit} />
@@ -341,6 +343,7 @@ const ClickMap = () => {
             type="submit"
             variant="info"
             className="m-2 btn-br"
+            id="expBtn"
           >
             <FontAwesomeIcon icon={faFilePdf} />
 
@@ -349,7 +352,7 @@ const ClickMap = () => {
         </Col>
       </Row>
       <Row>
-        <FormLabel htmlFor="topic" id="formLabel" > ⠀ Write your Ideas and press the Enter key or  "Go"</FormLabel>
+        <FormLabel htmlFor="topic" id="formLabel" > ⠀ <span id="topicLabel">Write your Ideas and press the Enter key or  "Go"</span></FormLabel>
       </Row>
       <Row className="menu_input">
         <Col sm={8} xs={10}>
@@ -364,12 +367,12 @@ const ClickMap = () => {
         <Col sm={2} xs={2}>
           <Button
             onClick={handleGoButton}
-            accessibilityLabel="Go"
+            accessibilitylabel="Go"
             type="submit"
             variant="success"
-            id="go">
+            id="go btn-br">
             <FontAwesomeIcon icon={faArrowCircleRight} />
-            ⠀Go
+            ⠀<span>Go</span>
           </Button>
 
         </Col>

@@ -74,13 +74,32 @@ p {
 
 .btn {
     border-radius: 3rem !important;
-
 }
 
 .btn-primary {
-    background-color: #5DB5AB !important;
-    border-color: #5DB5AB !important;
+
     color: #1c1c1c;
+}
+
+.btn-secondary:active {
+    color: white;
+}
+
+
+
+.btn-success:active,
+.btn-success:hover,
+.btn-secondary:active {
+    color: white;
+}
+
+.btn-secondary:active,
+.btn-secondary:not(:disabled):not(.disabled):active {
+    color: white;
+}
+
+.btn-success {
+    color: black;
 }
 
 .btn-link {
@@ -114,6 +133,42 @@ p {
     font-size: 2rem;
 }
 
+.btn-br:focus,
+.btn-br:focus-visible,
+.btn-br:focus-within {
+    filter: brightness(85%) !important;
+}
+
+.btn-br:active {
+    background-color: red;
+}
+.btn:focus{
+    color: white;
+}
+
+
+.btn-add {
+	background-color:#5db5ab;
+	-webkit-border-radius:22px;
+	-moz-border-radius:22px;
+	border-radius:22px;
+	display:inline-block;
+	cursor:pointer;
+	color:#1c1c1c;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+}
+.btn-add:hover {
+	background-color:#acbaa2;
+}
+.btn-add:active {
+	position:relative;
+	top:1px;
+}
+
+ 
 
 
 @media only screen and (max-width: 834px) {
