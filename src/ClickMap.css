@@ -52,6 +52,9 @@
 #logo{
   width: 7%
 }
+.node{
+  cursor: pointer;
+}
 
 @media only screen and (max-width: 834px) {
   .menu_input {

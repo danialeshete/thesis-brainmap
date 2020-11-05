@@ -5,7 +5,7 @@ import "./Banner.css";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Register from "./Register";
 import ClickMap from "./ClickMap";
-import { ReactComponent as Logo } from './logo_dark.svg';
+import { ReactComponent as Logo } from './logo_black_wname.svg';
 import animationData from "./lotties/working-man.json";
 
 
@@ -71,6 +71,7 @@ export class Banner extends React.Component {
               <Route path="/clickmap" component={ClickMap} />
               <Route path="/register" component={Register} />
             </Router>
+
             <h3 className="landing_text p-3">
                 
               </h3>

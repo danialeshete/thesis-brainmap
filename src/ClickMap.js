@@ -284,14 +284,13 @@ const ClickMap = () => {
     <Container>
       <Row className="justify-content mx-auto pt-3 menu">
         <Col>
-          <Router>
-            <span >
+          
+            <span className="mr-3 pr-3">
 
               <Logo id="logo" />
 
             </span>
-            <Route path="/home" component={Banner} />
-          </Router>
+            
 
 
 
@@ -335,7 +334,7 @@ const ClickMap = () => {
           >
             <FontAwesomeIcon icon={faFilePdf} />
 
-            ⠀Export to PDF
+            ⠀Export
           </Button>
         </Col>
       </Row>

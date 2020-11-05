@@ -1,8 +1,3 @@
-h1,
-p {
-    font-family: Lato;
-}
-
 h1 {
     font-family: 'Roboto Bold', sans-serif;
     font-weight: 900;
@@ -61,6 +56,8 @@ h1.span {
 
 body {
     background-color: #F9F3F1;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 #navbar_banner {
