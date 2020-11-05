@@ -28,6 +28,7 @@ const ClickMap = () => {
     .select("body")
     .append("div")
     .attr("id", "myDivToPrint")
+    .attr("alt", "The canvas where the brainstorm happens")
     .attr("class", "container")
     .append("svg")
     .attr("width", width)
