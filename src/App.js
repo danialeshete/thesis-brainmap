@@ -11,7 +11,7 @@ import ForceV5 from "./ForceV3";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
 import { Container } from "react-bootstrap";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./NavBar.css";
 
 class App extends Component {

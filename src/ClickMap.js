@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import * as d3 from "d3";
-import { FormControl, Button, Container, Col, Row } from "react-bootstrap";
+import { FormControl, Button, Container, Col, Row, FormLabel } from "react-bootstrap";
 import { ReactComponent as Logo } from './logo_dark.svg';
+import enter from './enter_key.png';
 import "./ClickMap.css";
-import { BrowserRouter as Router, Route, Link, useHistory } from "react-router-dom";
-import Banner from "./Banner";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlusCircle,faFilePdf,faTrashAlt,faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faPlusCircle, faFilePdf, faTrashAlt, faEdit, faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
 
 const ClickMap = () => {
   var width = window.innerWidth,
@@ -31,7 +30,6 @@ const ClickMap = () => {
     .attr("class", "container")
     .append("svg")
     .attr("alt", "The canvas where the brainstorm happens")
-
     .attr("width", width)
     .attr("height", height);
 
@@ -76,6 +74,15 @@ const ClickMap = () => {
       //d3.select("#editBtn").attr("border-color", "black");
       edit();
     } else if (action == "another" && e.key === "Enter") {
+    }
+  }
+  function handleGoButton() {
+    if (action == "add" ) {
+      d3.select("#addBtn").attr("border-color", "black");
+      add();
+    } else if (action == "edit") {
+      //d3.select("#editBtn").attr("border-color", "black");
+      edit();
     }
   }
 
@@ -286,62 +293,66 @@ const ClickMap = () => {
     <Container>
       <Row className="justify-content mx-auto pt-3 menu">
         <Col>
-          
-            <span className="mr-3 pr-3">
 
-              <Logo id="logo" />
+          <span className="mr-3 ">
 
-            </span>
-            
+            <Logo id="logo" />
+
+          </span>
+
 
 
 
           <Button
-            className="m-2"
+            className="m-2 btn-br"
             id="addBtn"
             onClick={changeActionToAdd}
             type="submit"
             variant="primary"
+
           >
             <FontAwesomeIcon icon={faPlusCircle} />
-            ⠀Add
+            ⠀<span> Add</span>
           </Button>
 
           <Button
-            className="m-2"
+            className="m-2 btn-br"
             onClick={changeActionToEdit}
             id="editBtn"
             variant="secondary"
           >
             <FontAwesomeIcon icon={faEdit} />
 
-            ⠀Edit
+            ⠀<span style={{ colo: "#080808" }}> Edit</span>
           </Button>
           <Button
             onClick={del}
             id="delBtn"
             type="submit"
             variant="danger"
-            className="m-2"
+            className="m-2 btn-br"
           >
             <FontAwesomeIcon icon={faTrashAlt} />
 
-            ⠀Delete
+            <span> Delete</span>
           </Button>
           <Button
             onClick={window.print}
             type="submit"
             variant="info"
-            className="m-2"
+            className="m-2 btn-br"
           >
             <FontAwesomeIcon icon={faFilePdf} />
 
-            ⠀Export
+            <span> Export</span>
           </Button>
         </Col>
       </Row>
+      <Row>
+        <FormLabel htmlFor="topic" id="formLabel" > ⠀ Write your Ideas and press the Enter key or  "Go"</FormLabel>
+      </Row>
       <Row className="menu_input">
-        <Col>
+        <Col sm={8} xs={10}>
           <FormControl
             id="topic"
             type="text"
@@ -349,6 +360,18 @@ const ClickMap = () => {
             placeholder="What do you want to brainstorm about?"
           //onChange= {document.getElementById("addBtn").disabled = false}
           />
+        </Col>
+        <Col sm={2} xs={2}>
+          <Button
+            onClick={handleGoButton}
+            accessibilityLabel="Go"
+            type="submit"
+            variant="success"
+            id="go">
+            <FontAwesomeIcon icon={faArrowCircleRight} />
+            ⠀Go
+          </Button>
+
         </Col>
       </Row>
     </Container>

@@ -80,6 +80,7 @@ p {
 .btn-primary {
     background-color: #5DB5AB !important;
     border-color: #5DB5AB !important;
+    color: #1c1c1c;
 }
 
 .btn-link {

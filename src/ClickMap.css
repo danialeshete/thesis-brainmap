@@ -44,6 +44,7 @@
 .btn-secondary {
   background-color: #c28c7e !important;
   border-color: #c28c7e !important;
+  color: #080808 !important;
 }
 .btn-info {
   background-color: #1d1f20 !important;
@@ -55,6 +56,15 @@
 .node{
   cursor: pointer;
 }
+#topic{
+  display: inline;
+}
+#enter{
+  position: absolute;
+  margin-left: 1%;
+  width: 5.5%;
+  
+}
 
 @media only screen and (max-width: 834px) {
   .menu_input {
@@ -62,5 +72,17 @@
   }
   #logo{
     width: 15%
+  }
+  .btn-br{
+    width: 40px;
+    height: 40px;
+  }
+  .btn-br > span{
+    display: none;
+    color: grey;
+  }
+  #formLabel{
+    margin-left: 2%;
+    font-size: 13px;
   }
 }

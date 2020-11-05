@@ -2,7 +2,7 @@ import React from "react";
 import Lottie from "react-lottie";
 import { Container, Row, Button, Navbar, Nav } from "react-bootstrap";
 import "./Banner.css";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Register from "./Register";
 import ClickMap from "./ClickMap";
 import { ReactComponent as Logo } from './logo_black_wname.svg';
