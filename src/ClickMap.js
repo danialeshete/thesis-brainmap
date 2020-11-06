@@ -237,10 +237,7 @@ const ClickMap = () => {
     document.getElementById("topic").focus();
   }
 
-  function changeBG() {
-    return document.getElementById("colorPicker").value;
-    //document.body.style.backgroundColor = document.getElementById("colorPicker").value;
-  }
+
   function del() {
     document.getElementById("topic").focus();
 

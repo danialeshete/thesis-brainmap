@@ -58,7 +58,7 @@ export class Banner extends React.Component {
             </Navbar.Collapse>
           </Navbar>
           <Row className="p-3">
-            <h1 className="landing_text" >The inovative way to brainstorm</h1>
+            <h1 className="landing_text" >The innovative way to brainstorm</h1>
             <h2 className="pt-1 pb-3 my-auto landing_text">
               BrainMap is a creative tool to enhance your ideation process
             </h2>
