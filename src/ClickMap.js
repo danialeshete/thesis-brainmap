@@ -77,7 +77,7 @@ const ClickMap = () => {
     }
   }
   function handleGoButton() {
-    if (action == "add" ) {
+    if (action == "add") {
       d3.select("#addBtn").attr("border-color", "black");
       add();
     } else if (action == "edit") {
@@ -88,14 +88,14 @@ const ClickMap = () => {
 
   function changeActionToAdd() {
     document.getElementById("addBtn").focus();
-    document.getElementById("topicLabel").innerHTML=`Add has been selcted. Enter or "Go" to add an Idea `;
+    document.getElementById("topicLabel").innerHTML = `Add has been selcted. Enter or "Go" to add an Idea `;
     action = "add";
     document.getElementById("topic").value = "";
     document.getElementById("topic").focus();
   }
 
   function changeActionToEdit() {
-    document.getElementById("topicLabel").innerHTML=`Edit has been selcted. Click on the Node to change it. `;
+    document.getElementById("topicLabel").innerHTML = `Edit has been selcted. Click on the Node to change it. `;
     document.getElementById("editBtn").focus();
     document.getElementById("topic").value = "";
     if (currentNode != undefined && nodes != undefined && document.getElementById("topic").value != "") {
@@ -309,7 +309,7 @@ const ClickMap = () => {
             onClick={changeActionToAdd}
             type="submit"
             variant="primary"
-            
+
 
           >
             <FontAwesomeIcon icon={faPlusCircle} />
@@ -349,6 +349,7 @@ const ClickMap = () => {
 
             <span> Export</span>
           </Button>
+  
         </Col>
       </Row>
       <Row>
