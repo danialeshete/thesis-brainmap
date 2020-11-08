@@ -53,11 +53,17 @@ h1.span {
 
 }
 
+html {
+    overflow: hidden;
+
+}
 
 body {
     background-color: #F9F3F1;
     -webkit-user-select: none;
     -webkit-tap-highlight-color: transparent;
+    overflow: hidden;
+
 }
 
 #navbar_banner {
@@ -142,33 +148,36 @@ p {
 .btn-br:active {
     background-color: red;
 }
-.btn:focus{
+
+.btn:focus {
     color: white;
 }
 
 
 .btn-add {
-	background-color:#5db5ab;
-	-webkit-border-radius:22px;
-	-moz-border-radius:22px;
-	border-radius:22px;
-	display:inline-block;
-	cursor:pointer;
-	color:#1c1c1c;
-	font-family:Arial;
-	font-size:17px;
-	padding:16px 31px;
-	text-decoration:none;
-}
-.btn-add:hover {
-	background-color:#acbaa2;
-}
-.btn-add:active {
-	position:relative;
-	top:1px;
+    background-color: #5db5ab;
+    -webkit-border-radius: 22px;
+    -moz-border-radius: 22px;
+    border-radius: 22px;
+    display: inline-block;
+    cursor: pointer;
+    color: #1c1c1c;
+    font-family: Arial;
+    font-size: 17px;
+    padding: 16px 31px;
+    text-decoration: none;
 }
 
- 
+.btn-add:hover {
+    background-color: #acbaa2;
+}
+
+.btn-add:active {
+    position: relative;
+    top: 1px;
+}
+
+
 
 
 @media only screen and (max-width: 834px) {

@@ -8,8 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusCircle, faFilePdf, faTrashAlt, faEdit, faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
 
 const ClickMap = () => {
-  var width = window.innerWidth-30,
-    height = window.innerHeight - 174,
+  var width = window.innerWidth ,
+    height = window.innerHeight -104,
     currentNode,
     index,
     radius = 20,
@@ -33,6 +33,10 @@ const ClickMap = () => {
     .attr("id", "svgCanvas")
     .attr("width", width)
     .attr("height", height);
+
+  window.addEventListener('touchmove', ev => {
+    ev.preventDefault();
+  }, { passive: false });
 
   if (nodes != null) {
     var nodes = force.nodes(JSON.parse(localStorage.getItem("savedNodes"))),
@@ -347,7 +351,7 @@ const ClickMap = () => {
 
             <span> Export</span>
           </Button>
-  
+
         </Col>
       </Row>
       <Row>
