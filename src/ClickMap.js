@@ -30,6 +30,7 @@ const ClickMap = () => {
     .attr("class", "container")
     .append("svg")
     .attr("alt", "The canvas where the brainstorm happens")
+    .attr("id", "svg")
     .attr("width", width)
     .attr("height", height);
 
