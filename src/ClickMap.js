@@ -56,11 +56,8 @@ const ClickMap = () => {
 
     if (nodes != null) {
       if (nodes.length !== 0) {
-        console.log("ist nicht leer");
-
         update();
       } else {
-        console.log("ist leer");
       }
     } else {
       nodes = force.nodes();

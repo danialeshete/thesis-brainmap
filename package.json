@@ -1,6 +1,6 @@
 {
-  "name": "react",
-  "version": "0.0.0",
+  "name": "brainmap",
+  "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "1.2.30",
@@ -17,6 +17,7 @@
     "react-dom": "16.13.1",
     "react-lottie": "1.2.3",
     "react-router-dom": "5.2.0",
+    "workbox-cli": "^5.1.4",
     "zlib": "1.0.5"
   },
   "scripts": {
