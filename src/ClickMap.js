@@ -234,7 +234,7 @@ const ClickMap = () => {
     } else if (action == "edit") {
       document.getElementById("topic").value = currentNode.text;
     }
-    document.getElementById("topic").focus();
+    //document.getElementById("topic").focus();
   }
 
 
