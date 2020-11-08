@@ -103,6 +103,9 @@ rect {
 .btn-primary:focus {
   background-color: yellow;
 }
+#goIcon + span{
+  margin-left: 5%;
+}
 @media only screen and (device-width : 375px) and (device-height : 812px) and (-webkit-device-pixel-ratio : 3) {
   #svgCanvas {
     width: 100%;
@@ -123,6 +126,10 @@ rect {
     width: 40px;
     height: 40px;
   }
+  #goIcon{
+    display:none;
+  }
+
 
   .btn-br>span {
     display: none;

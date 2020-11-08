@@ -371,8 +371,8 @@ const ClickMap = () => {
             type="submit"
             variant="success"
             id="go btn-br">
-            <FontAwesomeIcon icon={faArrowCircleRight} />
-            ⠀<span>Go</span>
+            <FontAwesomeIcon id="goIcon" icon={faArrowCircleRight} />
+          <span>Go</span>
           </Button>
 
         </Col>
