@@ -17,7 +17,7 @@
 
         }
     ],
-    "start_url": "/clickmap",
+    "start_url": "https://brainmap.vercel.app/clickmap",
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
     "display": "standalone",

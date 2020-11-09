@@ -38,5 +38,5 @@
    "density": "4.0"
   }
  ],
- "start_url": "/clickmap"
+ "start_url": "%PUBLIC_URL%/clickmap"
 }
