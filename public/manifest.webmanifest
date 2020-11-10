@@ -17,9 +17,9 @@
 
         }
     ],
-    "start_url": "https://brainmap.vercel.app/clickmap",
+    "start_url": "./clickmap",
+    "description": "BrainMap - The best way to brainstorm and create playful Mindmaps.", 
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
-    "display": "standalone",
-    "scope": "/"
+    "display": "standalone"
 }
