@@ -1,3 +1,15 @@
+:root{
+  --primary: #5db5ab;
+  --link:#1D1F20;
+  --background: #f9f3f1;
+  --add: #5db5ab;
+  --edit: #d39e00;
+  --delete: #da7d5e;
+  --export: #1d1f20;
+  --go: #218838;
+  --white: white;
+  --line: #9ecae1;
+}
 .link {
   fill: none;
   stroke: #9ecae1;
@@ -16,19 +28,6 @@ rect {
   pointer-events: none;
 }
 
-.link {
-  stroke: #999;
-  fill: none;
-}
-
-
-#topic {
-  width: 100%;
-}
-
-.test {
-  text-align: center;
-}
 
 .menu {
   padding-bottom: 1px;
@@ -41,26 +40,26 @@ rect {
 }
 
 #addBtn {
-  background-color: #5db5ab !important;
-  border-color: #5db5ab !important;
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
 }
 
 #editBtn {
-  background-color: #d39e00;
-  border-color: #d39e00;
+  background-color: var(--edit);
+  border-color: var(--edit);
   color: #080808;
 }
 
 #delBtn {
-  background-color: #da7d5e;
-  border-color: #da7d5e;
+  background-color: var(--delete);
+  border-color: var(--delete);
   color: #080808;
 }
 
 #expBtn {
-  background-color: #1d1f20 !important;
-  background-color: #1d1f20 !important;
-  color: white;
+  background-color: var(--export) !important;
+  background-color: var(--export) !important;
+  color: var(--white);
 }
 
 #expBtn:hover,
@@ -72,7 +71,7 @@ rect {
 #delBtn:hover,
 #editBtn:focus,
 #delBtn:focus {
-  color: white !important;
+  color: var(--white) !important;
 }
 
 .btn-info {
@@ -100,11 +99,9 @@ rect {
 
 }
 
-.btn-primary:focus {
-  background-color: yellow;
-}
+
 #goIcon + span{
-  margin-left: 3%;
+  margin-left: 0%;
 }
 @media only screen and (device-width : 375px) and (device-height : 812px) and (-webkit-device-pixel-ratio : 3) {
   #svgCanvas {
@@ -133,7 +130,7 @@ rect {
 
   .btn-br>span {
     display: none;
-    color: grey;
+  
   }
 
   #formLabel {

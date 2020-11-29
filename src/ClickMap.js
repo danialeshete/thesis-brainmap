@@ -8,8 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusCircle, faFilePdf, faTrashAlt, faEdit, faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
 
 const ClickMap = () => {
-  var width = window.innerWidth ,
-    height = window.innerHeight -104,
+  var width = window.innerWidth,
+    height = window.innerHeight - 104,
     currentNode,
     index,
     radius = 20,
@@ -89,7 +89,7 @@ const ClickMap = () => {
   }
 
   function changeActionToAdd() {
-    document.getElementById("addBtn").focus();
+    
     document.getElementById("topicLabel").innerHTML = `Add has been selcted. Enter or "Go" to add an Idea `;
     action = "add";
     document.getElementById("topic").value = "";
@@ -98,7 +98,6 @@ const ClickMap = () => {
 
   function changeActionToEdit() {
     document.getElementById("topicLabel").innerHTML = `Edit has been selcted. Click on the Node to change it. `;
-    document.getElementById("editBtn").focus();
     document.getElementById("topic").value = "";
     if (currentNode != undefined && nodes != undefined && document.getElementById("topic").value != "") {
       document.getElementById("topic").value = currentNode.text;
@@ -108,7 +107,7 @@ const ClickMap = () => {
   }
 
   function add() {
-    document.getElementById("topic").focus();
+    //document.getElementById("topic").focus();
     var topic = document.getElementById("topic").value;
 
     if (topic != "") {
@@ -236,7 +235,7 @@ const ClickMap = () => {
     } else if (action == "edit") {
       document.getElementById("topic").value = currentNode.text;
     }
-    //document.getElementById("topic").focus();
+    document.getElementById("topic").focus();
   }
 
 
@@ -372,7 +371,7 @@ const ClickMap = () => {
             variant="success"
             id="go btn-br">
             <FontAwesomeIcon id="goIcon" icon={faArrowCircleRight} />
-          <span>Go</span>
+            <span>Go</span>
           </Button>
 
         </Col>

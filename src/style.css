@@ -1,3 +1,15 @@
+:root{
+    --primary: #5db5ab;
+    --link:#1D1F20;
+    --background: #f9f3f1;
+    --add: #5db5ab;
+    --edit: #d39e00;
+    --delete: #da7d5e;
+    --export: #1d1f20;
+    --go: #218838;
+    --white: white;
+}
+
 h1 {
     font-family: 'Roboto Bold', sans-serif;
     font-weight: 900;
@@ -42,7 +54,7 @@ b {
 a {
     font-family: "Roboto Black", sans-serif;
     font-size: 16px;
-    color: #1D1F20;
+    color: var(--link);
 }
 
 
@@ -59,7 +71,7 @@ html {
 }
 
 body {
-    background-color: #F9F3F1;
+    background-color: var(--background);
     -webkit-user-select: none;
     -webkit-tap-highlight-color: transparent;
     overflow: hidden;
@@ -67,15 +79,15 @@ body {
 }
 
 #navbar_banner {
-    background-color: #F9F3F1 !important;
+    background-color: var(--background) !important;
 }
 
 b {
-    color: #1D1F20;
+    color: var(--link);
 }
 
 p {
-    color: #1D1F20;
+    color: var(--link);
 }
 
 .btn {
@@ -84,11 +96,11 @@ p {
 
 .btn-primary {
 
-    color: #1c1c1c;
+    color: var(--link);
 }
 
 .btn-secondary:active {
-    color: white;
+    color: var(--white);
 }
 
 
@@ -96,24 +108,24 @@ p {
 .btn-success:active,
 .btn-success:hover,
 .btn-secondary:active {
-    color: white;
+    color: var(--white);
 }
 
 .btn-secondary:active,
 .btn-secondary:not(:disabled):not(.disabled):active {
-    color: white;
+    color: var(--white);
 }
 
 .btn-success {
-    color: black;
+    color: var(--link);
 }
 
 .btn-link {
-    color: #1D1F20;
+    color: var(--link);
 }
 
 #banner-container {
-    background-color: #F9F3F1 !important;
+    background-color: var(--background) !important;
 }
 
 .lotties {
@@ -121,17 +133,14 @@ p {
     grid-template-columns: auto auto;
 }
 
-.click-circle {
-    fill: skyblue;
-}
 
 .navbar {
-    background-color: #F9F3F1 !important;
+    background-color: var(--background) !important;
 }
 
 .btn-brainmap {
-    background-color: #5DB5AB;
-    color: #F9F3F1;
+    background-color: var(--primary);
+    color: var(--background);
 }
 
 .btn-xxl {
@@ -145,23 +154,20 @@ p {
     filter: brightness(85%) !important;
 }
 
-.btn-br:active {
-    background-color: red;
-}
 
 .btn:focus {
-    color: white;
+    color: var(--white);
 }
 
 
 .btn-add {
-    background-color: #5db5ab;
+    background-color: var(--add);
     -webkit-border-radius: 22px;
     -moz-border-radius: 22px;
     border-radius: 22px;
     display: inline-block;
     cursor: pointer;
-    color: #1c1c1c;
+    color: var(--link);
     font-family: Arial;
     font-size: 17px;
     padding: 16px 31px;
@@ -169,7 +175,7 @@ p {
 }
 
 .btn-add:hover {
-    background-color: #acbaa2;
+    background-color: var(--white);
 }
 
 .btn-add:active {

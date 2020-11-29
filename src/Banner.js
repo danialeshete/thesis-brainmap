@@ -65,7 +65,7 @@ export class Banner extends React.Component {
 
 
             <Router>
-              <Button className="landing_text" size="xxl" variant="brainmap" href="/clickmap">
+              <Button className="landing_text mt-3 pt-3" size="xxl" variant="brainmap" href="/clickmap">
                 Start Brainstorming
               </Button>
               <Route path="/clickmap" component={ClickMap} />
