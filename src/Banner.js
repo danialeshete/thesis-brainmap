@@ -69,6 +69,7 @@ export class Banner extends React.Component {
                 Start Brainstorming
               </Button>
               <Route path="/clickmap" component={ClickMap} />
+             
               <Route path="/register" component={Register} />
             </Router>
 

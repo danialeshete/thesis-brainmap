@@ -52,7 +52,7 @@ function mousedownCanvas() {
   nodes.forEach(function(target) {
     var x = target.x - node.x,
         y = target.y - node.y;
-    if (Math.sqrt(x * x + y * y) < 30) {
+    if (Math.sqrt(x * x + y * y) < 100) {
       links.push({source: node, target: target});
     }
   });
@@ -129,14 +129,11 @@ function restart() {
 
   force.start();
 }
-  function add() {}
+
 
   return (
     <div>
-      <FormControl id="topic" type="text" />
-      <Button id="addBtn" onClick={add}>
-        add
-      </Button>
+
     </div>
   );
 };
